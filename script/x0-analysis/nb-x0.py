@@ -14,6 +14,7 @@ domain_lat_max = float(sys.argv[2])
 domain_lon_min = float(sys.argv[3])
 domain_lon_max = float(sys.argv[4])
 region_name = sys.argv[5]
+lead_time = sys.argv[6]
 
 # Data path
 data_path = "/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/"
@@ -57,14 +58,13 @@ for file_t0 in all_files:
 # Save and plot results
 if storm_counts:
     storm_counts = np.array(storm_counts)
-    np.save(f"{output_dir}/nbx0-{region_name}.npy", storm_counts)
-
+    np.save(f"{output_dir}/nbx0-{region_name}-{lead_time}.npy", storm_counts)
     plt.hist(storm_counts, bins=20, color="blue", alpha=0.7)
     plt.xlabel(f"Number of storms per image in {region_name.capitalize()}")
     plt.ylabel("Frequency")
     plt.title(f"Storm counts over {region_name.capitalize()} (JJA+S)")
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f"{output_dir}/nbx0-{region_name}.png")
+    plt.savefig(f"{output_dir}/nbx0-{region_name}-{lead_time}.png")
 else:
     print("No valid storm data was found.")
