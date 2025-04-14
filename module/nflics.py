@@ -1,8 +1,8 @@
 import regex as re
 import os
 import numpy as np
-from netCDF4 import Dataset             # type: ignore
-import netCDF4 as nc                    # type: ignore
+from netCDF4 import Dataset             
+import netCDF4 as nc                    
 from scipy import ndimage
 from skimage import measure
 
