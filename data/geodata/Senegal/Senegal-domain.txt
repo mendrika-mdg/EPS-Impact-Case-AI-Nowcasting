@@ -1,0 +1,2 @@
+Senegal_y_min, Senegal_x_min = 1650, 96
+Senegal_y_max, Senegal_x_max = 1861, 315
