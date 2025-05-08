@@ -23,7 +23,7 @@ domain_lon_max=$4
 
 
 # Execute the Python script with proper argument passing
-python /localhome/home/mmmhr/EPS-Impact-Case-AI-Nowcasting/script/x0-analysis/x0-spatial.py \
+python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/x0-analysis/x0-spatial.py \
   "$domain_lat_min" "$domain_lat_max" "$domain_lon_min" "$domain_lon_max"
 
 # Check if the Python script executed successfully
