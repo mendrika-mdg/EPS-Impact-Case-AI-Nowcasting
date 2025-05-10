@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1, "../../module")
+sys.path.insert(1, "/home/users/mendrika/SSA/SA/module")
 import copy, os
 from datetime import datetime, timedelta
 import snflics
@@ -273,7 +273,7 @@ with open(OUTPUT_PATH, "a") as output_file:
     input_header = generate_storm_feature_header(NB_X0, LOCATION_NAME)
     output_file.write(",".join(input_header) + "\n")
 
-    for file_t0 in all_files[:50]:
+    for file_t0 in all_files[:]:
 
         time_t0 = snflics.get_time(file_t0)
 

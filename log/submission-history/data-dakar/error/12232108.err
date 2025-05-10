@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/dakar.py", line 253, in <module>
+    all_files = [file for file in snflics.all_files_in(DATA_PATH) if snflics.get_time(file)["month"] in MONTHS_OF_INTEREST and snflics.get_time(file)["year"]==YEAR]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/SSA/SA/module/snflics.py", line 83, in all_files_in
+    raise ValueError(f"The specified path '{data_path}' is not a valid directory.")
+ValueError: The specified path '/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/' is not a valid directory.
