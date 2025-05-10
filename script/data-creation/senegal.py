@@ -4,7 +4,6 @@ import copy, os
 from datetime import datetime, timedelta
 import snflics
 import numpy as np      
-import csv
 from netCDF4 import Dataset                             
 from scipy.ndimage import label
 from scipy.ndimage import zoom
@@ -319,7 +318,7 @@ with open(INPUT_LT0, "a") as feature_file:
     input_header = generate_storm_feature_header(NB_X0, LOCATION_NAME)
     feature_file.write(",".join(input_header) + "\n")
 
-    for file_t0 in all_files[:100]:
+    for file_t0 in all_files[:]:
 
         time_t0 = snflics.get_time(file_t0)
 
