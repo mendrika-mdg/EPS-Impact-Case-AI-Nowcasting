@@ -14,7 +14,7 @@ module load jaspy/3.11
 # Activate the Python virtual environment
 source /home/users/mendrika/SSA/bin/activate
 
-
+year=$1
 
 # Execute the Python script with proper argument passing
 python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/senegal.py "$year"

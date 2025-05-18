@@ -277,9 +277,9 @@ YEAR = sys.argv[1]
 # Data and output paths
 LOCATION_NAME = "senegal"
 DATA_PATH = "/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/"
-INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/input-{LOCATION_NAME}-t0-{YEAR}.csv"
+INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/64x64/input-{LOCATION_NAME}-t0-{YEAR}.csv"
 OUTPUT_PATHS = {
-    f"LT{i}": f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/output-{LOCATION_NAME}-t{i}-{YEAR}.csv"
+    f"LT{i}": f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/64x64/output-{LOCATION_NAME}-t{i}-{YEAR}.csv"
     for i in range(7)
 }
 
@@ -309,7 +309,7 @@ Senegal_y_max, Senegal_x_max = 1861, 315
 CONTEXT_DOMAIN_LAT_MIN, CONTEXT_DOMAIN_LAT_MAX = 6.0, 24.0
 CONTEXT_DOMAIN_LON_MIN, CONTEXT_DOMAIN_LON_MAX = -24.0, -6.0
 
-TARGET_SHAPE_Y, TARGET_SHAPE_X = 128, 128
+TARGET_SHAPE_Y, TARGET_SHAPE_X = 64, 64
 
 with open(INPUT_LT0, "a") as feature_file:
 
