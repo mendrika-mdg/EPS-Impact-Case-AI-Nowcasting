@@ -277,7 +277,7 @@ YEAR = sys.argv[1]
 # Data and output paths
 LOCATION_NAME = "senegal"
 DATA_PATH = "/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/"
-INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/input-{LOCATION_NAME}-t0-{YEAR}.csv"
+INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/64x64/input-{LOCATION_NAME}-t0-{YEAR}.csv"
 OUTPUT_PATHS = {
     f"LT{i}": f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/64x64/output-{LOCATION_NAME}-t{i}-{YEAR}.csv"
     for i in range(7)
