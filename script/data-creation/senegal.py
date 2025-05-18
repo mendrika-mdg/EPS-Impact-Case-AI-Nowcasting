@@ -272,8 +272,6 @@ def resize_core(original_core, target_shape_y, target_shape_x):
     return zoom(original_core, zoom=zoom_factors, order=1)
 
 
-
-
 YEAR = sys.argv[1]
 
 # Data and output paths
