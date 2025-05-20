@@ -1,70 +1,108 @@
-from scipy import ndimage                                                               # type: ignore
 import os
-import warnings
-from netCDF4 import Dataset                                                             # type: ignore
-import numpy as np                                                                      # type: ignore
-warnings.filterwarnings("ignore")
 import sys
+import json
+from pathlib import Path
+
+import numpy as np              # type: ignore
+from netCDF4 import Dataset     # type: ignore
+
+# Insert local module path
 sys.path.insert(1, "/home/users/mendrika/SSA/SA/module")
-import snflics                                                                          # type: ignore
-from datetime import datetime, timedelta
-import copy
-import json                                                                             # type: ignore
-
-# Data and output paths
-DATA_PATH = "/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/"
-OUTPUT_PATH = f"/home/users/mendrika/SSA/SA/output/H0-analysis/"
-
-zone_name = sys.argv[1]
-
-zone = {
-    "zone_1": {"lat_min": -13.75, "lat_max": -12.5, "lon_min": 47.5, "lon_max": 49},
-    "zone_2": {"lat_min": -13.75, "lat_max": -12.5, "lon_min": 49, "lon_max": 50.5},
-    "zone_3": {"lat_min": -15, "lat_max": -13.75, "lon_min": 47.5, "lon_max": 49},
-    "zone_4": {"lat_min": -15, "lat_max": -13.75, "lon_min": 49, "lon_max": 50.5},
-}
-
-all_t0 = []
-for hour in range(24):
-    for minute in ["00", "15", "30", "45"]:
-        all_t0.append(f"{hour:02d}{minute}")
+import snflics                  # type: ignore
 
 
-MONTHS_OF_INTEREST = {'06', '07', '08', '09'}
+# ------------------------ CONFIGURATION ------------------------
 
-all_files = [file for file in snflics.all_files_in(DATA_PATH) if snflics.get_time(file)["month"] in MONTHS_OF_INTEREST and int(snflics.get_time(file)["year"]) <= 2019]
-S_0 = zone[zone_name]
-db = {zone_name: {}}
+DATA_PATH = Path("/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/")
+OUTPUT_PATH = Path("/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Senegal/H0/dakar")
 
-for t0 in all_t0:
-    
-    all_files_t0 = [file for file in all_files if (snflics.get_time(file)["hour"] + snflics.get_time(file)["minute"]) == t0]
-    all_files_t0.sort()
+CONTEXT_DOMAIN_LAT_MIN, CONTEXT_DOMAIN_LAT_MAX = 8.69, 20.69
+CONTEXT_DOMAIN_LON_MIN, CONTEXT_DOMAIN_LON_MAX = -23.45, -11.45
 
-    dates_wx0_in_S0_at_t0 = []
+ZONE_SIZE = 1.0                  # in degrees
+MONTHS_OF_INTEREST = {6, 7, 8, 9}
 
-    for file_t0 in all_files_t0[:]:
+# Time slots
+all_t0 = [f"{hour:02d}{minute}" for hour in range(24) for minute in ["00", "15", "30", "45"]]
 
-        time_t0 = snflics.get_time(file_t0)        
 
-        if os.path.exists(file_t0):
+# ------------------------ BUILD ZONES ------------------------
+
+def generate_zones(lat_min, lat_max, lon_min, lon_max, step=1.0):
+    zones = {}
+    zone_id = 1
+    lat_start = int(np.floor(lat_min))
+    lat_end = int(np.ceil(lat_max))
+    lon_start = int(np.floor(lon_min))
+    lon_end = int(np.ceil(lon_max))
+    for lat in range(lat_start, lat_end):
+        for lon in range(lon_start, lon_end):
+            zones[f"zone_{zone_id}"] = {
+                "lat_min": lat,
+                "lat_max": lat + step,
+                "lon_min": lon,
+                "lon_max": lon + step
+            }
+            zone_id += 1
+    return zones
+
+
+# ------------------------ MAIN PROCESSING ------------------------
+def main():
+
+    zones = generate_zones(CONTEXT_DOMAIN_LAT_MIN, CONTEXT_DOMAIN_LAT_MAX,
+                           CONTEXT_DOMAIN_LON_MIN, CONTEXT_DOMAIN_LON_MAX)
+
+    # Filter files only once
+    def is_valid_file(file):
+        time = snflics.get_time(file)
+        return int(time["year"]) <= 2019 and int(time["month"]) in MONTHS_OF_INTEREST
+
+    all_files = [file for file in snflics.all_files_in(DATA_PATH) if is_valid_file(file)]
+
+    for zone_name, zone_bounds in zones.items():
+
+        print(f"Processing {zone_name} ...")
+        db = {zone_name: {}}
         
-            try:
-                data_t0 = Dataset(file_t0, "r")
-            except OSError:
-                continue
-                    
-            lat = data_t0["max_lat"][:]
-            lon = data_t0["max_lon"][:]        
+        for t0 in all_t0:
+            files_t0 = []
+            for file in all_files:
+                time = snflics.get_time(file)
+                if (time["hour"] + time["minute"]) == t0:
+                    files_t0.append((file, time))
 
-            in_region = (lon >= S_0["lon_min"]) & (lon < S_0["lon_max"]) & (lat >= S_0["lat_min"]) & (lat < S_0["lat_max"])
-            lat, lon = lat[in_region], lon[in_region]
+            files_t0.sort()
+            dates_within_zone = []
 
-            if lat.size > 0 and lon.size > 0:
-                dates_wx0_in_S0_at_t0.append(f"{time_t0['year']}{time_t0['month']}{time_t0['day']}")
-        
-    data_zone = db[zone_name]
-    data_zone[t0] = dates_wx0_in_S0_at_t0
+            for file_t0, time_t0 in files_t0:
+                if not os.path.exists(file_t0):
+                    continue
+                try:
+                    with Dataset(file_t0, "r") as data:
+                        lat = data["max_lat"][:]
+                        lon = data["max_lon"][:]
+                except Exception:
+                    continue
 
-with open(f"{OUTPUT_PATH}{zone_name}_sofia.json", "w") as json_file:
-    json.dump(db, json_file, indent=4)
+                in_region = (
+                    (lon >= zone_bounds["lon_min"]) & (lon < zone_bounds["lon_max"]) &
+                    (lat >= zone_bounds["lat_min"]) & (lat < zone_bounds["lat_max"])
+                )
+
+                if np.any(in_region):
+                    date_str = f"{time_t0['year']}{time_t0['month']}{time_t0['day']}"
+                    dates_within_zone.append(date_str)
+
+            db[zone_name][t0] = dates_within_zone
+
+        output_file = OUTPUT_PATH / f"{zone_name}_dakar.json"
+        with open(output_file, "w") as f:
+            json.dump(db, f, indent=4)
+
+        print(f"Saved results to {output_file}")
+
+    # ------------------------ ENTRY POINT ------------------------
+
+if __name__ == "__main__":
+    main()
