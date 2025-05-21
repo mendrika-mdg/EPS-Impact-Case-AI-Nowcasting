@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/H0-analysis/create-database.py", line 114, in <module>
+    main()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/H0-analysis/create-database.py", line 100, in main
+    date_str = f"{time_t0['year']}{time_t0['month']:02d}{time_t0['day']:02d}"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown format code 'd' for object of type 'str'
