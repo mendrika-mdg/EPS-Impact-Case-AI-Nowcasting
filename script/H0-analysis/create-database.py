@@ -32,27 +32,24 @@ all_t0 = [f"{hour:02d}{minute}" for hour in range(24) for minute in ["00", "15",
 def main():
     # Define zones
     zones = {
-        'zone_1': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -23.45, 'lon_max': -20.45},
-        'zone_2': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -20.45, 'lon_max': -17.45},
-        'zone_3': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -17.45, 'lon_max': -14.45},
-        'zone_4': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -14.45, 'lon_max': -11.45},
-        'zone_5': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -23.45, 'lon_max': -20.45},
-        'zone_6': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -20.45, 'lon_max': -17.45},
-        'zone_7': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -17.45, 'lon_max': -14.45},
-        'zone_8': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -14.45, 'lon_max': -11.45},
-        'zone_9': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -23.45, 'lon_max': -20.45},
-        'zone_10': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -20.45, 'lon_max': -17.45},
-        'zone_11': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -17.45, 'lon_max': -14.45},
-        'zone_12': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -14.45, 'lon_max': -11.45},
-        'zone_13': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -23.45, 'lon_max': -20.45},
-        'zone_14': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -20.45, 'lon_max': -17.45},
-        'zone_15': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -17.45, 'lon_max': -14.45},
-        'zone_16': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -14.45, 'lon_max': -11.45},
-        'zone_17': {'lat_min': 20.69, 'lat_max': 20.69, 'lon_min': -23.45, 'lon_max': -20.45},
-        'zone_18': {'lat_min': 20.69, 'lat_max': 20.69, 'lon_min': -20.45, 'lon_max': -17.45},
-        'zone_19': {'lat_min': 20.69, 'lat_max': 20.69, 'lon_min': -17.45, 'lon_max': -14.45},
-        'zone_20': {'lat_min': 20.69, 'lat_max': 20.69, 'lon_min': -14.45, 'lon_max': -11.45},
+    'zone_1': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -23.45, 'lon_max': -20.45},
+    'zone_2': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -20.45, 'lon_max': -17.45},
+    'zone_3': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -17.45, 'lon_max': -14.45},
+    'zone_4': {'lat_min': 8.69, 'lat_max': 11.69, 'lon_min': -14.45, 'lon_max': -11.45},
+    'zone_5': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -23.45, 'lon_max': -20.45},
+    'zone_6': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -20.45, 'lon_max': -17.45},
+    'zone_7': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -17.45, 'lon_max': -14.45},
+    'zone_8': {'lat_min': 11.69, 'lat_max': 14.69, 'lon_min': -14.45, 'lon_max': -11.45},
+    'zone_9': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -23.45, 'lon_max': -20.45},
+    'zone_10': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -20.45, 'lon_max': -17.45},
+    'zone_11': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -17.45, 'lon_max': -14.45},
+    'zone_12': {'lat_min': 14.69, 'lat_max': 17.69, 'lon_min': -14.45, 'lon_max': -11.45},
+    'zone_13': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -23.45, 'lon_max': -20.45},
+    'zone_14': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -20.45, 'lon_max': -17.45},
+    'zone_15': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -17.45, 'lon_max': -14.45},
+    'zone_16': {'lat_min': 17.69, 'lat_max': 20.69, 'lon_min': -14.45, 'lon_max': -11.45}
     }
+
 
     if zone_name not in zones:
         print(f"Error: zone_name '{zone_name}' not found.")
