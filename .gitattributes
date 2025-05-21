@@ -1,2 +1,0 @@
-*.nc filter=lfs diff=lfs merge=lfs -text
-data/geodata/lat_lon_v2.nc filter=lfs diff=lfs merge=lfs -text
