@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timedelta
 import snflics
 import numpy as np      
-from netCDF4 import Dataset                             
+from netCDF4 import Dataset              # type: ignore               
 from scipy.ndimage import label
 from scipy.ndimage import zoom
 
@@ -85,7 +85,7 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 
         return R * c
 
-def generate_storm_feature_header(n, location):
+def generate_storm_feature_header(n):
     """
     Generate a list of header names for n closest storms.
     Format: [year, month, day, hour, minute,
@@ -102,20 +102,30 @@ def generate_storm_feature_header(n, location):
     return headers
 
 # core within the context domain    
-def create_storm_database(location_lat, location_lon, x0_lat, x0_lon, mask_in, data_t0):
+def create_storm_database(location_lat, location_lon, x0_lat, x0_lon, mask_in, data_t0, lats, lons):
+    """
+    Identify storm cores within the context domain and extract features for each core.
 
+    Parameters:
+        location_lat (float): Latitude of the reference location (e.g. city centre).
+        location_lon (float): Longitude of the reference location.
+        x0_lat (np.ndarray): Latitude coordinates of core points.
+        x0_lon (np.ndarray): Longitude coordinates of core points.
+        mask_in (np.ndarray): Boolean mask to filter valid points inside the context domain.
+        data_t0 (netCDF4.Dataset): Dataset at t0 containing 'cores' variable.
+        lats, lons (np.ndarray): 2D arrays of grid latitudes and longitudes.
+
+    Returns:
+        dict: Dictionary of storm features indexed by core label.
+    """
     x0_lat, x0_lon = x0_lat[mask_in], x0_lon[mask_in]
-
-    # Extract storm data
     cores_t0 = data_t0["cores"][0, :, :]
 
-    # Label the storm cores
     labeled_array, _ = label(cores_t0 != 0)
     core_labels = np.unique(labeled_array[labeled_array != 0])
 
-    # Compute storm sizes and mean wavelet power
     dict_storm_size = {
-        core_label: np.sum(labeled_array == core_label) * 9             # because the grid spacing is 3 x 3 km
+        core_label: np.sum(labeled_array == core_label) * 9
         for core_label in core_labels
     }
 
@@ -124,21 +134,23 @@ def create_storm_database(location_lat, location_lon, x0_lat, x0_lon, mask_in, d
         for core_label in core_labels
     }
 
-    # Assign storm properties to each labeled storm using x0 coordinates
     storm_database = {}
     for lat, lon in zip(x0_lat, x0_lon):
-        x0_y, x0_x = snflics.to_yx(lat, lon, lats, lons)
+        try:
+            x0_y, x0_x = snflics.to_yx(lat, lon, lats, lons)
+        except IndexError:
+            continue  # Skip points that fall outside the coordinate grid
+
         lab = labeled_array[x0_y, x0_x]
         distance = haversine_distance(location_lat, location_lon, lat, lon)
-        
-        # Skip points not associated with a storm or already added
+
         if lab == 0 or lab in storm_database:
             continue
 
         storm_database[int(lab)] = {
             "lat": lat,
             "lon": lon,
-            "wp": (dict_storm_intensity[lab]),
+            "wp": dict_storm_intensity[lab],
             "size": dict_storm_size[lab],
             "distance": distance,
             "mask": 1
@@ -146,30 +158,38 @@ def create_storm_database(location_lat, location_lon, x0_lat, x0_lon, mask_in, d
 
     return storm_database
 
+
 def flatten_storm_features(t0, X0_features):
     """
     Given a list of closest storms [(id, dict), ...],
     return a flattened feature vector in the order:
     [year, month, day, hour, minute,
-     lat1, lat2, ..., lon1, lon2, ..., wp1, wp2, ..., size1, ..., distance1, ..., mask1, ...]
+     lat1, lat2, ..., lon1, lon2, ..., wp1, ..., size1, ..., distance1, ..., mask1, ...]
+    
+    This avoids name conflicts with global grid variables.
     """
+    def normalise_lon(lon):
+        """Ensure longitude is in the range [-180, 180]."""
+        return ((lon + 180) % 360) - 180
+
     t0 = list(map(int, t0.values()))
-    lats = []
-    lons = []
-    wps = []
-    sizes = []
-    distances = []
-    masks = []
+    storm_lats = []
+    storm_lons = []
+    storm_wps = []
+    storm_sizes = []
+    storm_distances = []
+    storm_masks = []
 
     for _, feature in X0_features:
-        lats.append(feature['lat'])
-        lons.append(feature['lon'])
-        wps.append(feature['wp'])
-        sizes.append(feature['size'])
-        distances.append(feature['distance'])
-        masks.append(feature['mask'])
+        storm_lats.append(feature['lat'])
+        storm_lons.append(normalise_lon(feature['lon']))
+        storm_wps.append(feature['wp'])
+        storm_sizes.append(feature['size'])
+        storm_distances.append(feature['distance'])
+        storm_masks.append(feature['mask'])
 
-    return t0 + lats + lons + wps + sizes + distances + masks
+    return t0 + storm_lats + storm_lons + storm_wps + storm_sizes + storm_distances + storm_masks
+
 
 def generate_fictional_storm(city_lat, city_lon,
                               context_lat_min, context_lat_max,
@@ -315,7 +335,7 @@ TARGET_SHAPE_Y, TARGET_SHAPE_X = 64, 64
 
 with open(INPUT_LT0, "a") as feature_file:
 
-    input_header = generate_storm_feature_header(NB_X0, LOCATION_NAME)
+    input_header = generate_storm_feature_header(NB_X0)
     feature_file.write(",".join(input_header) + "\n")
 
     for file_t0 in all_files[:]:
@@ -343,7 +363,7 @@ with open(INPUT_LT0, "a") as feature_file:
 
                 if in_region.any():
                     # database of all identified storms
-                    storm_database = create_storm_database(center_lat, center_lon, x0_lat, x0_lon, in_region, data_t0)
+                    storm_database = create_storm_database(center_lat, center_lon, x0_lat, x0_lon, in_region, data_t0, lats, lons)
 
                     # taking a certain number of closest storms
                     sorted_database = sorted(storm_database.items(), key=lambda item: item[1]['distance'])
