@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timedelta
 import snflics
 import numpy as np      
-from netCDF4 import Dataset              # type: ignore               
+from netCDF4 import Dataset                                            # type: ignore               
 from scipy.ndimage import label
 from scipy.ndimage import zoom
 
@@ -294,12 +294,14 @@ def resize_core(original_core, target_shape_y, target_shape_x):
 
 YEAR = sys.argv[1]
 
+TARGET_SHAPE_Y, TARGET_SHAPE_X = 128, 128
+
 # Data and output paths
 LOCATION_NAME = "zambia"
 DATA_PATH = "/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/"
-INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Zambia/64x64/input-{LOCATION_NAME}-t0-{YEAR}.csv"
+INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Zambia/{TARGET_SHAPE_Y}x{TARGET_SHAPE_X}/input-{LOCATION_NAME}-t0-{YEAR}.csv"
 OUTPUT_PATHS = {
-    f"LT{i}": f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Zambia/64x64/output-{LOCATION_NAME}-t{i}-{YEAR}.csv"
+    f"LT{i}": f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Data/Zambia/{TARGET_SHAPE_Y}x{TARGET_SHAPE_X}/output-{LOCATION_NAME}-t{i}-{YEAR}.csv"
     for i in range(7)
 }
 
@@ -331,7 +333,6 @@ CONTEXT_DOMAIN_LON_MIN = 15
 CONTEXT_DOMAIN_LON_MAX = 41
 
 
-TARGET_SHAPE_Y, TARGET_SHAPE_X = 64, 64
 
 with open(INPUT_LT0, "a") as feature_file:
 
