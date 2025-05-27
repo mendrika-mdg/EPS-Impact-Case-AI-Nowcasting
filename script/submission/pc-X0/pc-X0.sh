@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #SBATCH --job-name=H0
-#SBATCH --time=24:00:00
+#SBATCH --time=72:00:00
 #SBATCH --mem=128G
-#SBATCH --qos=standard
+#SBATCH --qos=long
 #SBATCH --partition=standard
 #SBATCH --account=wiser-ewsa
 #SBATCH --output=/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/submission-history/pc-X0/output/%j.out
