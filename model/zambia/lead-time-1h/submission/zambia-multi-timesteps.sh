@@ -13,7 +13,7 @@
 
 # Load environment
 module load jaspy/3.11
-source /home/users/mendrika/virtual-env/DeepLearning/bin/activate
+source /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/bin/activate
 
 # Run the script
 srun python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1.py
