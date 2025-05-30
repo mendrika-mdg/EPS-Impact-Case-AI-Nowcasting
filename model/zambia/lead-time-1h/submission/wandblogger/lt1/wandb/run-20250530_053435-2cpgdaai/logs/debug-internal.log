@@ -1,0 +1,15 @@
+{"time":"2025-05-30T05:34:35.874309343+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/submission/wandblogger/lt1/wandb/run-20250530_053435-2cpgdaai/logs/debug-core.log"}
+{"time":"2025-05-30T05:34:36.115795683+01:00","level":"INFO","msg":"created new stream","id":"2cpgdaai"}
+{"time":"2025-05-30T05:34:36.115831812+01:00","level":"INFO","msg":"stream: started","id":"2cpgdaai"}
+{"time":"2025-05-30T05:34:36.115856572+01:00","level":"INFO","msg":"handler: started","stream_id":"2cpgdaai"}
+{"time":"2025-05-30T05:34:36.115875752+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"2cpgdaai"}
+{"time":"2025-05-30T05:34:36.115988991+01:00","level":"INFO","msg":"sender: started","stream_id":"2cpgdaai"}
+{"time":"2025-05-30T05:34:36.525463641+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-30T05:39:03.163706594+01:00","level":"INFO","msg":"stream: closing","id":"2cpgdaai"}
+{"time":"2025-05-30T05:39:03.163756294+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-30T05:39:03.164047+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-30T05:39:04.006774455+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-30T05:39:04.162290787+01:00","level":"INFO","msg":"handler: closed","stream_id":"2cpgdaai"}
+{"time":"2025-05-30T05:39:04.162309987+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"2cpgdaai"}
+{"time":"2025-05-30T05:39:04.162340887+01:00","level":"INFO","msg":"sender: closed","stream_id":"2cpgdaai"}
+{"time":"2025-05-30T05:39:04.163512713+01:00","level":"INFO","msg":"stream: closed","id":"2cpgdaai"}

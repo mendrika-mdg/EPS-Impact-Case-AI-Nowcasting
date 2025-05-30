@@ -22,4 +22,4 @@ echo "Running on node: $(hostname)"
 nvidia-smi
 
 # IMPORTANT: use `srun` to launch PyTorch Lightning with DDP
-srun python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-wb-corrected.py
+srun python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py

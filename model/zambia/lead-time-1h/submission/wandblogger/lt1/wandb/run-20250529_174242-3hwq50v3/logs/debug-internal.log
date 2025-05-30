@@ -1,0 +1,15 @@
+{"time":"2025-05-29T17:42:42.237552437+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/submission/wandblogger/lt1/wandb/run-20250529_174242-3hwq50v3/logs/debug-core.log"}
+{"time":"2025-05-29T17:42:42.492193028+01:00","level":"INFO","msg":"created new stream","id":"3hwq50v3"}
+{"time":"2025-05-29T17:42:42.492235497+01:00","level":"INFO","msg":"stream: started","id":"3hwq50v3"}
+{"time":"2025-05-29T17:42:42.492311906+01:00","level":"INFO","msg":"sender: started","stream_id":"3hwq50v3"}
+{"time":"2025-05-29T17:42:42.492305476+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"3hwq50v3"}
+{"time":"2025-05-29T17:42:42.492378035+01:00","level":"INFO","msg":"handler: started","stream_id":"3hwq50v3"}
+{"time":"2025-05-29T17:42:42.844883545+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-29T17:48:24.780829964+01:00","level":"INFO","msg":"stream: closing","id":"3hwq50v3"}
+{"time":"2025-05-29T17:48:24.780899493+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-29T17:48:24.781232657+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-29T17:48:25.314463586+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-29T17:48:25.530312301+01:00","level":"INFO","msg":"handler: closed","stream_id":"3hwq50v3"}
+{"time":"2025-05-29T17:48:25.53034509+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"3hwq50v3"}
+{"time":"2025-05-29T17:48:25.53035043+01:00","level":"INFO","msg":"sender: closed","stream_id":"3hwq50v3"}
+{"time":"2025-05-29T17:48:25.533950551+01:00","level":"INFO","msg":"stream: closed","id":"3hwq50v3"}

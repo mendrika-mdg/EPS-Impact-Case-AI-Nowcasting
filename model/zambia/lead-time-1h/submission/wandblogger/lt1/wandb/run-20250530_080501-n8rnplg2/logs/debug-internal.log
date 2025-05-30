@@ -1,0 +1,7 @@
+{"time":"2025-05-30T08:05:01.100676805+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/submission/wandblogger/lt1/wandb/run-20250530_080501-n8rnplg2/logs/debug-core.log"}
+{"time":"2025-05-30T08:05:01.34877656+01:00","level":"INFO","msg":"created new stream","id":"n8rnplg2"}
+{"time":"2025-05-30T08:05:01.348814479+01:00","level":"INFO","msg":"stream: started","id":"n8rnplg2"}
+{"time":"2025-05-30T08:05:01.348827339+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"n8rnplg2"}
+{"time":"2025-05-30T08:05:01.348841889+01:00","level":"INFO","msg":"handler: started","stream_id":"n8rnplg2"}
+{"time":"2025-05-30T08:05:01.348841849+01:00","level":"INFO","msg":"sender: started","stream_id":"n8rnplg2"}
+{"time":"2025-05-30T08:05:01.755749155+01:00","level":"INFO","msg":"Starting system monitor"}

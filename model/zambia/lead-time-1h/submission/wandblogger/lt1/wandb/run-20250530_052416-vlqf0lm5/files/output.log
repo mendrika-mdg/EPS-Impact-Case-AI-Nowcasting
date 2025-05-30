@@ -1,0 +1,170 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name      | Type                     | Params | Mode
+---------------------------------------------------------------
+0 | model     | MultiStepTabularConvLSTM | 860 K  | train
+1 | criterion | BCELoss                  | 0      | train
+2 | precision | BinaryPrecision          | 0      | train
+3 | recall    | BinaryRecall             | 0      | train
+4 | f1        | BinaryF1Score            | 0      | train
+5 | auc       | BinaryAUROC              | 0      | train
+6 | prc       | BinaryAveragePrecision   | 0      | train
+---------------------------------------------------------------
+860 K     Trainable params
+0         Non-trainable params
+860 K     Total params
+3.441     Total estimated model params size (MB)
+22        Modules in train mode
+0         Modules in eval mode
+SLURM auto-requeueing enabled. Setting signal handlers.
+Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py", line 287, in <module>
+    main()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py", line 244, in main
+    trainer.fit(model, train_loader, val_loader)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+    call._call_and_handle_interrupt(
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+    return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1054, in _run_stage
+    self._run_sanity_check()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1083, in _run_sanity_check
+    val_loop.run()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+    return loop_run(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 145, in run
+    self._evaluation_step(batch, batch_idx, dataloader_idx, dataloader_iter)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 437, in _evaluation_step
+    output = call._call_strategy_hook(trainer, hook_name, *step_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 328, in _call_strategy_hook
+    output = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 411, in validation_step
+    return self._forward_redirection(self.model, self.lightning_module, "validation_step", *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 641, in __call__
+    wrapper_output = wrapper_module(*args, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1637, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1464, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 634, in wrapped_forward
+    out = method(*_args, **_kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py", line 128, in validation_step
+    loss = self.criterion(y_hat, y)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/loss.py", line 699, in forward
+    return F.binary_cross_entropy(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/functional.py", line 3560, in binary_cross_entropy
+    raise ValueError(
+ValueError: Using a target size (torch.Size([16, 1, 64, 64])) that is different to the input size (torch.Size([16, 1, 256, 256])) is deprecated. Please ensure they have the same size.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py", line 287, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py", line 244, in main
+[rank0]:     trainer.fit(model, train_loader, val_loader)
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank0]:     call._call_and_handle_interrupt(
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank0]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank0]:     self._run(model, ckpt_path=ckpt_path)
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank0]:     results = self._run_stage()
+[rank0]:               ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1054, in _run_stage
+[rank0]:     self._run_sanity_check()
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1083, in _run_sanity_check
+[rank0]:     val_loop.run()
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+[rank0]:     return loop_run(self, *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 145, in run
+[rank0]:     self._evaluation_step(batch, batch_idx, dataloader_idx, dataloader_iter)
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 437, in _evaluation_step
+[rank0]:     output = call._call_strategy_hook(trainer, hook_name, *step_args)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 328, in _call_strategy_hook
+[rank0]:     output = fn(*args, **kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 411, in validation_step
+[rank0]:     return self._forward_redirection(self.model, self.lightning_module, "validation_step", *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 641, in __call__
+[rank0]:     wrapper_output = wrapper_module(*args, **kwargs)
+[rank0]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1637, in forward
+[rank0]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank0]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1464, in _run_ddp_forward
+[rank0]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/strategy.py", line 634, in wrapped_forward
+[rank0]:     out = method(*_args, **_kwargs)
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-convlstm.py", line 128, in validation_step
+[rank0]:     loss = self.criterion(y_hat, y)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/modules/loss.py", line 699, in forward
+[rank0]:     return F.binary_cross_entropy(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/nn/functional.py", line 3560, in binary_cross_entropy
+[rank0]:     raise ValueError(
+[rank0]: ValueError: Using a target size (torch.Size([16, 1, 64, 64])) that is different to the input size (torch.Size([16, 1, 256, 256])) is deprecated. Please ensure they have the same size.

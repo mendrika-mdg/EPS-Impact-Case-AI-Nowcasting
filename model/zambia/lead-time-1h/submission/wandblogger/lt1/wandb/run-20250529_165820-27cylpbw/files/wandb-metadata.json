@@ -1,0 +1,60 @@
+{
+  "os": "Linux-5.14.0-503.40.1.el9_5.x86_64-x86_64-with-glibc2.34",
+  "python": "CPython 3.12.2",
+  "startedAt": "2025-05-29T15:58:20.288307Z",
+  "program": "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-wb-corrected.py",
+  "codePath": "model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-wb-corrected.py",
+  "git": {
+    "remote": "ssh://ssh.github.com:443/mendrika-mdg/EPS-Impact-Case-AI-Nowcasting.git",
+    "commit": "526aba3639b01f7f8cb75d1eab1fab9c796bda4a"
+  },
+  "email": "mgrakotomanga@gmail.com",
+  "root": "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/submission/wandblogger/lt1",
+  "host": "gpuhost001.jc.rl.ac.uk",
+  "executable": "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/bin/python",
+  "codePathLocal": "model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-wb-corrected.py",
+  "cpu_count": 32,
+  "cpu_count_logical": 64,
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "gpu_count": 4,
+  "disk": {
+    "/": {
+      "total": "75094818816",
+      "used": "26463551488"
+    }
+  },
+  "memory": {
+    "total": "540345524224"
+  },
+  "cpu": {
+    "count": 32,
+    "countLogical": 64
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA A100-SXM4-40GB",
+      "memoryTotal": "42949672960",
+      "cudaCores": 6912,
+      "architecture": "Ampere"
+    },
+    {
+      "name": "NVIDIA A100-SXM4-40GB",
+      "memoryTotal": "42949672960",
+      "cudaCores": 6912,
+      "architecture": "Ampere"
+    },
+    {
+      "name": "NVIDIA A100-SXM4-40GB",
+      "memoryTotal": "42949672960",
+      "cudaCores": 6912,
+      "architecture": "Ampere"
+    },
+    {
+      "name": "NVIDIA A100-SXM4-40GB",
+      "memoryTotal": "42949672960",
+      "cudaCores": 6912,
+      "architecture": "Ampere"
+    }
+  ],
+  "cudaVersion": "12.9"
+}

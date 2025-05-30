@@ -1,0 +1,22 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name      | Type                     | Params | Mode
+---------------------------------------------------------------
+0 | model     | MultiStepTabularConvLSTM | 612 K  | train
+1 | criterion | BCELoss                  | 0      | train
+2 | precision | BinaryPrecision          | 0      | train
+3 | recall    | BinaryRecall             | 0      | train
+4 | f1        | BinaryF1Score            | 0      | train
+5 | auc       | BinaryAUROC              | 0      | train
+6 | prc       | BinaryAveragePrecision   | 0      | train
+---------------------------------------------------------------
+612 K     Trainable params
+0         Non-trainable params
+612 K     Total params
+2.450     Total estimated model params size (MB)
+22        Modules in train mode
+0         Modules in eval mode
+SLURM auto-requeueing enabled. Setting signal handlers.
+Epoch 5: 100%|██████████| 1351/1351 [00:21<00:00, 61.93it/s, v_num=48eh, train_loss=0.0352, val_precision=0.335, val_recall=0.031, val_f1=0.0567, val_auc=0.860, val_prc=0.0913]   
+/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py:434: It is recommended to use `self.log('val_loss', ..., sync_dist=True)` when logging on epoch level in distributed setting to accumulate the metric across devices.
+                                                                           

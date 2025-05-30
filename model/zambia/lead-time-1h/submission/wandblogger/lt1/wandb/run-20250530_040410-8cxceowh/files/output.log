@@ -1,0 +1,51 @@
+W0530 04:04:21.949000 225607 torch/multiprocessing/spawn.py:169] Terminating process 225729 via signal SIGTERM
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-wb-corrected.py", line 227, in <module>
+    main()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/zambia/lead-time-1h/Zambia-multi-timesteps-t1-wb-corrected.py", line 201, in main
+    trainer.fit(model, train_loader, val_loader)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+    call._call_and_handle_interrupt(
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+    return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/multiprocessing.py", line 144, in launch
+    while not process_context.join():
+              ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/multiprocessing/spawn.py", line 215, in join
+    raise ProcessRaisedException(msg, error_index, failed_process.pid)
+torch.multiprocessing.spawn.ProcessRaisedException:
+
+-- Process 1 terminated with the following error:
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/multiprocessing/spawn.py", line 90, in _wrap
+    fn(i, *args)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/multiprocessing.py", line 173, in _wrapping_function
+    results = function(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 968, in _run
+    self.strategy.setup_environment()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/ddp.py", line 154, in setup_environment
+    self.setup_distributed()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/pytorch_lightning/strategies/ddp.py", line 203, in setup_distributed
+    _init_dist_connection(self.cluster_environment, self._process_group_backend, timeout=self._timeout)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/lightning_fabric/utilities/distributed.py", line 298, in _init_dist_connection
+    torch.distributed.init_process_group(torch_distributed_backend, rank=global_rank, world_size=world_size, **kwargs)
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 95, in wrapper
+    func_return = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 1710, in init_process_group
+    store, rank, world_size = next(rendezvous_iterator)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/distributed/rendezvous.py", line 278, in _env_rendezvous_handler
+    store = _create_c10d_store(
+            ^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/lib/python3.12/site-packages/torch/distributed/rendezvous.py", line 198, in _create_c10d_store
+    return TCPStore(
+           ^^^^^^^^^
+torch.distributed.DistNetworkError: The server socket has failed to listen on any local network address. port: 15434, useIpv6: false, code: -98, name: EADDRINUSE, message: address already in use
