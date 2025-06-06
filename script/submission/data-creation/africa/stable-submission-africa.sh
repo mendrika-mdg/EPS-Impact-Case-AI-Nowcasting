@@ -16,16 +16,23 @@ set -e
 # Activate your environment
 source /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/bin/activate
 
-# Remount GWS safely
-gwsmount /gws/nopw/j04/wiser_ewsa/mrakotomanga || {
-    echo "GWS mount failed, exiting."
-    exit 1
-}
+# Attempt GWS mount with retries
+for i in {1..3}; do
+    gwsmount /gws/nopw/j04/wiser_ewsa/mrakotomanga && break
+    echo "Retrying gwsmount ($i)..."
+    sleep 5
+done
 
-# Optionally: wait a bit to ensure GWS is fully ready
+# Test if GWS is really accessible
+if ! ls /gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa > /dev/null 2>&1; then
+    echo "GWS mounted but inaccessible. Exiting safely."
+    exit 1
+fi
+
+# Short pause before starting
 sleep 5
 
-# Launch the actual job
-python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/x0-analysis/nb-x0-panafrica-mpi.py
+# Launch python
+python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/africa-mpi.py
 
 echo "Job completed successfully."

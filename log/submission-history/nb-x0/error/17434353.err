@@ -1,0 +1,10 @@
+slurmstepd: error: couldn't chdir to `/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa': Transport endpoint is not connected: going to /tmp instead
+slurmstepd: error: couldn't chdir to `/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa': Transport endpoint is not connected: going to /tmp instead
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/africa-mpi.py", line 254, in <module>
+    os.makedirs(BASE_INPUT_DIR, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 225, in makedirs
+OSError: [Errno 107] Transport endpoint is not connected: '/gws/nopw/j04/wiser_ewsa/mrakotomanga'

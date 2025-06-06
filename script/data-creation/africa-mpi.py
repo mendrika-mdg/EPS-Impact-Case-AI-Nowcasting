@@ -1,13 +1,19 @@
 import os
 import sys
-sys.path.insert(1, "/home/users/mendrika/SSA/SA/module")
-import snflics
 import torch
 import numpy as np
 from netCDF4 import Dataset
-from multiprocessing import Pool
 from scipy.ndimage import label, zoom
+from multiprocessing import Pool, set_start_method
 from datetime import datetime, timedelta
+
+sys.path.insert(1, "/home/users/mendrika/SSA/SA/module")
+import snflics
+
+try:
+    set_start_method("fork")
+except RuntimeError:
+    pass
 
 def prepare_core(file):
     """
@@ -73,25 +79,52 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
     return R * c
 
+def extract_box(matrix, y, x, box_size=3):
+    half = box_size // 2
+    y_min = max(y - half, 0)
+    y_max = min(y + half + 1, matrix.shape[0])
+    x_min = max(x - half, 0)
+    x_max = min(x + half + 1, matrix.shape[1])
+    return matrix[y_min:y_max, x_min:x_max]
+
 def create_storm_database(data_t0, lats, lons):
     """
     Identify storm cores and extract features for each core.
 
     Args:
-        data_t0 (Dataset): Dataset containing 'cores' variable.
+        data_t0 (Dataset): Dataset containing 'cores' and 'tir' variables.
         lats, lons (np.ndarray): 2D lat/lon arrays of the domain.
 
     Returns:
         dict: Storm database indexed by core label.
     """
     cores_t0 = data_t0["cores"][0, :, :]
+    tir_t0   = data_t0['tir'][0, :, :]
     x0_lat, x0_lon = data_t0["max_lat"][:], data_t0["max_lon"][:]
-    labeled_array, _ = label(cores_t0 != 0)
+    
+    # label all cores
+    labeled_array, _ = label(cores_t0 != 0)     
     core_labels = np.unique(labeled_array[labeled_array != 0])
 
+    # creating database of sizes, intensities and ctts
     dict_storm_size = {lab: np.sum(labeled_array == lab) * 9 for lab in core_labels}
     dict_storm_intensity = {lab: np.mean(cores_t0[labeled_array == lab]) for lab in core_labels}
-    
+
+    # Compute min temperature of a core but based on 3x3 average around min TIR
+    dict_storm_temperature = {}
+
+    for lab in core_labels:
+        mask = (labeled_array == lab)
+        tir_core = tir_t0[mask]      
+        # tir_core is a 1D array                   
+        min_index = np.argmin(tir_core)                 
+        # Get absolute indices of the min location
+        yx_indices = np.argwhere(mask)[min_index]
+        y, x = yx_indices
+        box = extract_box(tir_t0, y, x)
+        avg_tir = float(np.mean(box))
+        dict_storm_temperature[lab] = avg_tir
+
     storm_database = {}
     for lat, lon in zip(x0_lat, x0_lon):
         try:
@@ -101,8 +134,16 @@ def create_storm_database(data_t0, lats, lons):
         lab = labeled_array[y, x]
         if lab == 0 or lab in storm_database:
             continue
-        storm_database[int(lab)] = {"lat": lat, "lon": lon, "wp": dict_storm_intensity[lab], "size": dict_storm_size[lab], "mask": 1}
+        storm_database[int(lab)] = {
+            "lat": lat, 
+            "lon": lon, 
+            "wp": dict_storm_intensity[lab], 
+            "tir": dict_storm_temperature[lab],
+            "size": dict_storm_size[lab], 
+            "mask": 1
+        }
     return storm_database
+
 
 def resize_core(original_core, target_shape_y, target_shape_x):
     """
@@ -139,7 +180,10 @@ def generate_fictional_storm(context_lat_min, context_lat_max, context_lon_min, 
         d_west  = haversine_distance(lat, lon, lat, context_lon_min)
         if min(d_north, d_south, d_east, d_west) < min_km_buffer:
             continue
-        return ('artificial', {'lat': lat, 'lon': lon, 'wp': 0.0, 'size': 0, 'mask': 0})
+
+        # lat lon in the buffer zone
+        # warm enough to be non-convective, realistic for Africa, covers both day and night
+        return ('artificial', {'lat': lat, 'lon': lon, 'wp': 0.0, 'tir': float(np.random.uniform(20.0, 35.0)), 'size': 0, 'mask': 0})
 
 def pad_observed_storms(storm_db, nb_x0, context_lat_min, context_lat_max, context_lon_min, context_lon_max):
     """
@@ -173,23 +217,22 @@ def transform_to_array(time_obs, data):
         data (list): List of (id, storm dict).
 
     Returns:
-        np.ndarray: Array shape (N, 10).
+        np.ndarray: Array shape (N, 11).
     """
     year = int(time_obs['year'])
     month = int(time_obs['month'])
     day = int(time_obs['day'])
     hour = int(time_obs['hour'])
-    minute = int(time_obs['minute'])  # <-- Corrected
+    minute = int(time_obs['minute'])
     result = []
     for _, entry in data:
         lat, lon = float(entry['lat']), float(entry['lon'])
-        wp, size, mask = float(entry['wp']), int(entry['size']), int(entry['mask'])
-        result.append([year, month, day, hour, minute, lat, lon, wp, size, mask])
+        wp, tir, size, mask = float(entry['wp']), float(entry['tir']), int(entry['size']), int(entry['mask'])
+        result.append([year, month, day, hour, minute, lat, lon, wp, tir, size, mask])
     return np.array(result)
 
 
 # Assume you load lats, lons, constants here once (global scope)
-
 geodata = np.load("/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/data/geodata/lat_lon_2268_2080.npz")
 lons, lats = geodata["lon"][:], geodata["lat"][:]
 
@@ -199,18 +242,31 @@ TARGET_DOMAIN_LAT_MIN, TARGET_DOMAIN_LAT_MAX = -40, 40
 TARGET_DOMAIN_LON_MIN, TARGET_DOMAIN_LON_MAX = -25, 60
 CONTEXT_DOMAIN_LAT_MIN, CONTEXT_DOMAIN_LAT_MAX = -46, 46
 CONTEXT_DOMAIN_LON_MIN, CONTEXT_DOMAIN_LON_MAX = -31, 66
-TARGET_SHAPE_Y, TARGET_SHAPE_X = 1028, 1028
+TARGET_SHAPE_Y, TARGET_SHAPE_X = 1024, 1024
+
 DATA_PATH = "/gws/nopw/j04/cocoon/SSA_domain/ch9_wavelet/"
-NB_X0 = 2
+NB_X0 = 140
+
+
+# Output folders
+BASE_INPUT_DIR = "/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa/inputs_t0"
+BASE_TARGET_DIR = "/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa/targets_t{}"
+os.makedirs(BASE_INPUT_DIR, exist_ok=True)
+for i in range(7):
+    os.makedirs(BASE_TARGET_DIR.format(i), exist_ok=True)
+
 
 all_files = [file for file in snflics.all_files_in(DATA_PATH) if snflics.get_time(file)["year"] == YEAR]
 all_files.sort()
+
 
 def process_file(file_t0):
     
     try:
         time_t0 = snflics.get_time(file_t0)
         files_info = [update_hour(time_t0, h) for h in range(7)]
+
+        # index 1 to get the path
         files = [DATA_PATH + info[1] for info in files_info]
 
         if not all(os.path.exists(f) for f in files):
@@ -220,38 +276,38 @@ def process_file(file_t0):
 
         with Dataset(file_t0, "r") as data_t0:
             x0_lat, x0_lon = data_t0["max_lat"][:], data_t0["max_lon"][:]
-            if x0_lat.size == 0:
+            if x0_lat.size == 0 or x0_lon.size == 0:
                 return
 
             storm_database = create_storm_database(data_t0, lats, lons)
+
             X0_features = pad_observed_storms(storm_database, NB_X0,
                                                CONTEXT_DOMAIN_LAT_MIN, CONTEXT_DOMAIN_LAT_MAX,
                                                CONTEXT_DOMAIN_LON_MIN, CONTEXT_DOMAIN_LON_MAX)
+            
             input_features = transform_to_array(time_t0, X0_features)
             input_tensor = torch.tensor(input_features, dtype=torch.float32)
 
-            INPUT_LT0 = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa/inputs_t0/input-{time_t0['year']}{time_t0['month']}{time_t0['day']}_{time_t0['hour']}{time_t0['minute']}.pt"
-            os.makedirs(os.path.dirname(INPUT_LT0), exist_ok=True)
-            torch.save(input_tensor, INPUT_LT0)
+            input_filename = f"input-{time_t0['year']}{time_t0['month']}{time_t0['day']}_{time_t0['hour']}{time_t0['minute']}.pt"
+            torch.save(input_tensor, os.path.join(BASE_INPUT_DIR, input_filename))
 
-            OUTPUT_PATHS = {
-                f"LT{i}": f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa/targets_t{i}/target-{time_t0['year']}{time_t0['month']}{time_t0['day']}_{time_t0['hour']}{time_t0['minute']}.pt"
-                for i in range(7)
-            }
-
-            for i, core in enumerate(core_series):
-                resized_core = resize_core(core, TARGET_SHAPE_Y, TARGET_SHAPE_X).astype(np.uint8)
-                Cb = (resized_core != 0)
-                target_tensor = torch.tensor(Cb, dtype=torch.uint8)
-                output_file_path = OUTPUT_PATHS[f"LT{i}"]
-                os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
-                torch.save(target_tensor, output_file_path)
+            for lead_time, core in enumerate(core_series):
+                resized_core = resize_core(core, TARGET_SHAPE_Y, TARGET_SHAPE_X)
+                cb_mask = (resized_core != 0).astype(np.uint8)
+                target_tensor = torch.from_numpy(cb_mask)
+                output_file = f"target-{time_t0['year']}{time_t0['month']}{time_t0['day']}_{time_t0['hour']}{time_t0['minute']}.pt"
+                torch.save(target_tensor, os.path.join(BASE_TARGET_DIR.format(lead_time), output_file))
 
         print(f"Finished: {file_t0}")
+
     except Exception as e:
         print(f"Error on {file_t0}: {e}")
 
 if __name__ == "__main__":
-    num_workers = 8
+
+    num_workers = int(os.environ.get("SLURM_CPUS_PER_TASK", 1))
+    print(f"Using {num_workers} workers")
+    sys.stdout.flush()
+
     with Pool(num_workers) as p:
         p.map(process_file, all_files)

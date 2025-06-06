@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/dakar.py", line 5, in <module>
-    import snflics
-ModuleNotFoundError: No module named 'snflics'

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH --job-name=africa-nbx0
+#SBATCH --job-name=africa-creation
 #SBATCH --time=24:00:00
 #SBATCH --mem=256G
 #SBATCH --qos=standard
 #SBATCH --partition=standard
 #SBATCH --account=wiser-ewsa
-#SBATCH -o /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/submission-history/nb-x0/output/%j.out
-#SBATCH -e /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/submission-history/nb-x0/error/%j.err
+#SBATCH -o /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/data-creation-africa/output/%j.out
+#SBATCH -e /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/data-creation-africa/error/%j.err
 
 # Fail immediately if any command exits with non-zero status
 set -e
