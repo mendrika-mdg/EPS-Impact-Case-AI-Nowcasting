@@ -13,12 +13,13 @@
 
 set -e
 
-module load jaspy/3.11
-
+# Activate your environment
 source /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/bin/activate
 
-YEAR=$1
+# Optionally: wait a bit to ensure GWS is fully ready
+sleep 5
 
-python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/africa-mpi.py "${YEAR}"
+# Launch the actual job
+python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/normalisation.py
 
 echo "Job completed successfully."

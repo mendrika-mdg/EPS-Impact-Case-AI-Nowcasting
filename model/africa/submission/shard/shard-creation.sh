@@ -11,14 +11,18 @@
 #SBATCH -o /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/submission-history/nb-x0/output/%j.out
 #SBATCH -e /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/log/submission-history/nb-x0/error/%j.err
 
-set -e
+set -e  # Exit on error
 
-module load jaspy/3.11
+echo "Started on $(hostname) at $(date)"
 
+
+echo "Activating virtual environment..."
 source /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/.venv/bin/activate
 
-YEAR=$1
+# Slight pause to allow GWS to settle
+sleep 5
 
-python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/script/data-creation/africa-mpi.py "${YEAR}"
+echo "Launching job script..."
+python /home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/shard-creation.py
 
-echo "Job completed successfully."
+echo "Job completed at $(date)"
