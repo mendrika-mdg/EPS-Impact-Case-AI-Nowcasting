@@ -53,7 +53,6 @@ for shard_idx in range(num_shards):
     start = shard_idx * SAMPLES_PER_SHARD
     end = min((shard_idx + 1) * SAMPLES_PER_SHARD, num_files)
     indices = list(range(start, end))
-    # num_workers = min(48, len(indices))
     
     num_workers = min(4, len(indices))
 

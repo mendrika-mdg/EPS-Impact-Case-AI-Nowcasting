@@ -17,7 +17,7 @@ logging.basicConfig(
 )
 
 class _PreProcessor:
-    """Batch-compatible preprocessor for storm nowcasting features (with `day` and `wp` removed)."""
+    """Batch-compatible preprocessor for storm nowcasting features (with `year`, `day` and `wp` removed)."""
     def __init__(self, norm_json: str):
         with open(norm_json, "r") as f:
             self.norm = json.load(f)
@@ -73,7 +73,6 @@ class _PreProcessor:
         return out if is_batch else out.squeeze(0)
 
 
-
 @torch.no_grad()
 def process_single_shard(shards_dir: str, norm_path: str, output_dir: str, glob_pattern: str = "*.pt"):
     processor = _PreProcessor(norm_path)
@@ -88,6 +87,7 @@ def process_single_shard(shards_dir: str, norm_path: str, output_dir: str, glob_
     if not shard_files:
         raise FileNotFoundError(f"No shard files found in: {shards_dir}")
 
+    # idx is from the SLURM scheduler, I just need to make sure this has the same length as the iterable
     if idx >= len(shard_files):
         raise IndexError(f"SLURM_ARRAY_TASK_ID={idx} is out of range. Found only {len(shard_files)} files.")
 
