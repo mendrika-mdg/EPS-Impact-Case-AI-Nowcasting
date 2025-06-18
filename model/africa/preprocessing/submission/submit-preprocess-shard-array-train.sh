@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH --job-name=shard-creation
+#SBATCH --job-name=proc-train
 #SBATCH --time=48:00:00
-#SBATCH --mem=256G
+#SBATCH --mem=16G
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
+#SBATCH --cpus-per-task=1
 #SBATCH --partition=standard
 #SBATCH --qos=high
-#SBATCH --array=0-451  
+#SBATCH --array=0-463
 #SBATCH --account=wiser-ewsa
 #SBATCH --exclude=host1114
 #SBATCH -o /work/scratch-nopw2/mrakotomanga/eps/log/output/%A_%a.out

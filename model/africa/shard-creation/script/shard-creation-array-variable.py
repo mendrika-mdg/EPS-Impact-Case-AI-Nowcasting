@@ -14,7 +14,7 @@ SAMPLES_PER_SHARD = 1000
 TMPDIR = "/work/scratch-nopw2/mrakotomanga/eps/pancast"
 INPUT_DIR = os.path.join(TMPDIR, "inputs_t0")
 TARGET_DIR = os.path.join(TMPDIR, f"targets_t{LEAD_TIME}")
-OUTPUT_DIR = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa_sharded/t{LEAD_TIME}/{PARTITION}"
+OUTPUT_DIR = f"/work/scratch-nopw2/mrakotomanga/eps/pancast-shard/t{LEAD_TIME}/{PARTITION}"
 
 # === SLURM Array Index ===
 try:

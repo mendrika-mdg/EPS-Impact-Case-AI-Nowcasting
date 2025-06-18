@@ -101,9 +101,8 @@ def process_single_shard(shards_dir: str, norm_path: str, output_dir: str, glob_
     x_batch, y_batch = data["inputs"], data["targets"]
     x_batch_proc = processor(x_batch.float())
 
-    os.makedirs(output_dir, exist_ok=True)
     fname = os.path.basename(fp).replace(".pt", "_proc.pt")
-    out_path = os.path.join(output_dir, fname)
+    out_path = os.path.join(output_dir, f"t{LEAD_TIME}-{fname}")
 
     torch.save({"inputs": x_batch_proc, "targets": y_batch}, out_path)
     logging.info(f"Saved to: {out_path}")
@@ -116,9 +115,10 @@ if __name__ == "__main__":
     PARTITION = sys.argv[1]
     LEAD_TIME = int(sys.argv[2])  # ensure integer
 
-    root_dir = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa_sharded/t{LEAD_TIME}/{PARTITION}"
+
     norm_path = "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/normalisation/parameters/normalisation.json"
-    output_path = f"/gws/nopw/j04/wiser_ewsa/mrakotomanga/EPS/Africa_sharded/processed/t{LEAD_TIME}/{PARTITION}"
+    root_dir = f"/work/scratch-nopw2/mrakotomanga/eps/pancast-shard/t{LEAD_TIME}/{PARTITION}"
+    output_path = f"/work/scratch-nopw2/mrakotomanga/eps/pancast-shard-processed/t{LEAD_TIME}/{PARTITION}"
 
     process_single_shard(
         shards_dir=root_dir,

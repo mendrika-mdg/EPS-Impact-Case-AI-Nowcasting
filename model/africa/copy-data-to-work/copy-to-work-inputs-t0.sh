@@ -20,20 +20,8 @@ WORK_BASE="/work/scratch-nopw2/mrakotomanga/eps/pancast"
 
 echo "Creating target directories..."
 mkdir -p $WORK_BASE/inputs_t0
-mkdir -p $WORK_BASE/targets_t1
-mkdir -p $WORK_BASE/targets_t3
-mkdir -p $WORK_BASE/targets_t6
 
 echo "Copying inputs_t0 to $WORK_BASE/inputs_t0... at $(date)"
 find $GWS_BASE/inputs_t0 -name "*.pt" -print0 | xargs -0 -n 100 cp -t $WORK_BASE/inputs_t0
-
-echo "Copying targets_t1 to $WORK_BASE/targets_t1... at $(date)"
-find $GWS_BASE/targets_t1 -name "*.pt" -print0 | xargs -0 -n 100 cp -t $WORK_BASE/targets_t1
-
-echo "Copying targets_t3 to $WORK_BASE/targets_t3... at $(date)"
-find $GWS_BASE/targets_t3 -name "*.pt" -print0 | xargs -0 -n 100 cp -t $WORK_BASE/targets_t3
-
-echo "Copying targets_t6 to $WORK_BASE/targets_t6... at $(date)"
-find $GWS_BASE/targets_t6 -name "*.pt" -print0 | xargs -0 -n 100 cp -t $WORK_BASE/targets_t6
 
 echo "✅ All files copied successfully at $(date)"
