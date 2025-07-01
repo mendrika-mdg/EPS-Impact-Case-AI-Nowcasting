@@ -1,0 +1,51 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | token_proj  | Linear             | 36.1 K | train
+3 | decoder     | SimpleDecoder      | 689 K  | train
+4 | criterion   | BCEWithLogitsLoss  | 0      | train
+5 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+1.5 M     Trainable params
+0         Non-trainable params
+1.5 M     Total params
+6.079     Total estimated model params size (MB)
+73        Modules in train mode
+0         Modules in eval mode
+Epoch 21: 100%|██████████| 1000/1000 [00:34<00:00, 28.79it/s, v_num=r8nj, val_auc=0.840]
+                                                                           
+[rank: 0] Metric val_auc improved. New best score: 0.604
+Epoch 0, global step 1000: 'val_auc' reached 0.60446 (best 0.60446), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.049 >= min_delta = 0.001. New best score: 0.654
+Epoch 1, global step 2000: 'val_auc' reached 0.65367 (best 0.65367), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.075 >= min_delta = 0.001. New best score: 0.729
+Epoch 2, global step 3000: 'val_auc' reached 0.72889 (best 0.72889), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.067 >= min_delta = 0.001. New best score: 0.796
+Epoch 3, global step 4000: 'val_auc' reached 0.79589 (best 0.79589), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+Epoch 4, global step 5000: 'val_auc' was not in top 1
+[rank: 0] Metric val_auc improved by 0.040 >= min_delta = 0.001. New best score: 0.836
+Epoch 5, global step 6000: 'val_auc' reached 0.83582 (best 0.83582), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.042 >= min_delta = 0.001. New best score: 0.878
+Epoch 6, global step 7000: 'val_auc' reached 0.87780 (best 0.87780), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.041 >= min_delta = 0.001. New best score: 0.918
+Epoch 7, global step 8000: 'val_auc' reached 0.91833 (best 0.91833), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.002 >= min_delta = 0.001. New best score: 0.920
+Epoch 8, global step 9000: 'val_auc' reached 0.92014 (best 0.92014), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+Epoch 9, global step 10000: 'val_auc' was not in top 1
+Epoch 10, global step 11000: 'val_auc' was not in top 1
+[rank: 0] Metric val_auc improved by 0.009 >= min_delta = 0.001. New best score: 0.929
+Epoch 11, global step 12000: 'val_auc' reached 0.92928 (best 0.92928), saving model to './core2map/y7krr8nj/checkpoints/best-core2map.ckpt' as top 1
+Epoch 12, global step 13000: 'val_auc' was not in top 1
+Epoch 13, global step 14000: 'val_auc' was not in top 1
+Epoch 14, global step 15000: 'val_auc' was not in top 1
+Epoch 15, global step 16000: 'val_auc' was not in top 1
+Epoch 16, global step 17000: 'val_auc' was not in top 1
+Epoch 17, global step 18000: 'val_auc' was not in top 1
+Epoch 18, global step 19000: 'val_auc' was not in top 1
+Epoch 19, global step 20000: 'val_auc' was not in top 1
+Epoch 20, global step 21000: 'val_auc' was not in top 1
+[rank: 0] Monitored metric val_auc did not improve in the last 10 records. Best score: 0.929. Signaling Trainer to stop.
+Epoch 21, global step 22000: 'val_auc' was not in top 1

@@ -1,0 +1,41 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | token_proj  | Linear             | 36.1 K | train
+3 | decoder     | SimpleDecoder      | 689 K  | train
+4 | criterion   | BCEWithLogitsLoss  | 0      | train
+5 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+1.5 M     Trainable params
+0         Non-trainable params
+1.5 M     Total params
+6.079     Total estimated model params size (MB)
+73        Modules in train mode
+0         Modules in eval mode
+Epoch 9: 100%|██████████| 250/250 [00:09<00:00, 26.51it/s, v_num=r6b6, val_auc=0.992]
+/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: No positive samples in targets, true positive value should be meaningless. Returning zero tensor in true positive score
+  warnings.warn(*args, **kwargs)
+Done!                                                                      
+[rank: 0] Metric val_auc improved. New best score: 0.322
+Epoch 0, global step 250: 'val_auc' reached 0.32198 (best 0.32198), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.202 >= min_delta = 0.001. New best score: 0.524
+Epoch 1, global step 500: 'val_auc' reached 0.52434 (best 0.52434), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.265 >= min_delta = 0.001. New best score: 0.789
+Epoch 2, global step 750: 'val_auc' reached 0.78943 (best 0.78943), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.176 >= min_delta = 0.001. New best score: 0.966
+Epoch 3, global step 1000: 'val_auc' reached 0.96570 (best 0.96570), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.006 >= min_delta = 0.001. New best score: 0.971
+Epoch 4, global step 1250: 'val_auc' reached 0.97127 (best 0.97127), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.008 >= min_delta = 0.001. New best score: 0.979
+Epoch 5, global step 1500: 'val_auc' reached 0.97912 (best 0.97912), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.002 >= min_delta = 0.001. New best score: 0.981
+Epoch 6, global step 1750: 'val_auc' reached 0.98130 (best 0.98130), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.008 >= min_delta = 0.001. New best score: 0.989
+Epoch 7, global step 2000: 'val_auc' reached 0.98899 (best 0.98899), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.005 >= min_delta = 0.001. New best score: 0.993
+Epoch 8, global step 2250: 'val_auc' reached 0.99349 (best 0.99349), saving model to './core2map/9uk2r6b6/checkpoints/best-core2map.ckpt' as top 1
+Epoch 9, global step 2500: 'val_auc' was not in top 1
+`Trainer.fit` stopped: `max_epochs=10` reached.

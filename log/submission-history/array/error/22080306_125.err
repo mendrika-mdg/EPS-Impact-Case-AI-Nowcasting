@@ -1,0 +1,2 @@
+[2025-06-25 21:29:26] INFO: [126/464] Processing: /work/scratch-nopw2/mrakotomanga/eps/pancast-shard/t3/train/shard-train-125.pt
+[2025-06-25 21:33:03] INFO: Saved to: /work/scratch-nopw2/mrakotomanga/eps/pancast-shard-processed-ds/t3/train_512/t3-shard-train-125_proc.pt

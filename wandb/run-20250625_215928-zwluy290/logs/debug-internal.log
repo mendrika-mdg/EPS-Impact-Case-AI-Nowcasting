@@ -1,0 +1,16 @@
+{"time":"2025-06-25T21:59:28.724997679+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250625_215928-zwluy290/logs/debug-core.log"}
+{"time":"2025-06-25T21:59:29.006812132+01:00","level":"INFO","msg":"stream: created new stream","id":"zwluy290"}
+{"time":"2025-06-25T21:59:29.006858031+01:00","level":"INFO","msg":"stream: started","id":"zwluy290"}
+{"time":"2025-06-25T21:59:29.006875301+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"zwluy290"}
+{"time":"2025-06-25T21:59:29.00689847+01:00","level":"INFO","msg":"handler: started","stream_id":"zwluy290"}
+{"time":"2025-06-25T21:59:29.00692177+01:00","level":"INFO","msg":"sender: started","stream_id":"zwluy290"}
+{"time":"2025-06-25T21:59:29.456992974+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-25T22:20:14.982886353+01:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/mgrakotomanga-university-of-leeds/pancast-t3/zwluy290/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}
+{"time":"2025-06-26T01:29:22.806929609+01:00","level":"INFO","msg":"stream: closing","id":"zwluy290"}
+{"time":"2025-06-26T01:29:22.806976608+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-26T01:29:22.807145745+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-26T01:29:28.414438767+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-26T01:29:28.748352744+01:00","level":"INFO","msg":"handler: closed","stream_id":"zwluy290"}
+{"time":"2025-06-26T01:29:28.748427803+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"zwluy290"}
+{"time":"2025-06-26T01:29:28.748433973+01:00","level":"INFO","msg":"sender: closed","stream_id":"zwluy290"}
+{"time":"2025-06-26T01:29:28.749895816+01:00","level":"INFO","msg":"stream: closed","id":"zwluy290"}

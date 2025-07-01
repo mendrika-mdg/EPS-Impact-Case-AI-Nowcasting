@@ -1,0 +1,141 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | token_proj  | Linear             | 36.1 K | train
+3 | decoder     | SimpleDecoder      | 689 K  | train
+4 | criterion   | BCEWithLogitsLoss  | 0      | train
+5 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+1.5 M     Trainable params
+0         Non-trainable params
+1.5 M     Total params
+6.079     Total estimated model params size (MB)
+73        Modules in train mode
+0         Modules in eval mode
+Epoch 1: 100%|██████████| 125/125 [00:04<00:00, 27.47it/s, v_num=7o2t, val_auc=0.768]
+Validation DataLoader 0: 100%|██████████| 125/125 [00:00<00:00, 137.42it/s]
+[rank: 0] Metric val_auc improved. New best score: 0.768
+Epoch 0, global step 125: 'val_auc' reached 0.76773 (best 0.76773), saving model to './core2map/wyji7o2t/checkpoints/best-core2map.ckpt' as top 1
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 169, in <module>
+    main()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 165, in main
+    trainer.fit(model, train_loader, val_loader)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+    call._call_and_handle_interrupt(
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+    return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+    self.fit_loop.run()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+    self.advance()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+    self.epoch_loop.run(self._data_fetcher)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 151, in run
+    self.on_advance_end(data_fetcher)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 370, in on_advance_end
+    self.val_loop.run()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+    return loop_run(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 152, in run
+    return self.on_run_end()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 295, in on_run_end
+    self._on_evaluation_epoch_end()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 375, in _on_evaluation_epoch_end
+    call._call_lightning_module_hook(trainer, hook_name)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 176, in _call_lightning_module_hook
+    output = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 113, in on_validation_epoch_end
+    auc = self.val_auc.compute()
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/metric.py", line 699, in wrapped_func
+    value = _squeeze_if_scalar(compute(*args, **kwargs))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/classification/auroc.py", line 125, in compute
+    return _binary_auroc_compute(state, self.thresholds, self.max_fpr)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/functional/classification/auroc.py", line 89, in _binary_auroc_compute
+    fpr, tpr, _ = _binary_roc_compute(state, thresholds, pos_label)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/functional/classification/roc.py", line 54, in _binary_roc_compute
+    fps, tps, thres = _binary_clf_curve(preds=state[0], target=state[1], pos_label=pos_label)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/functional/classification/precision_recall_curve.py", line 60, in _binary_clf_curve
+    desc_score_indices = torch.argsort(preds, descending=True)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 9.77 GiB. GPU 0 has a total capacity of 39.49 GiB of which 2.17 GiB is free. Including non-PyTorch memory, this process has 37.31 GiB memory in use. Of the allocated memory 24.94 GiB is allocated by PyTorch, and 10.85 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 169, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 165, in main
+[rank0]:     trainer.fit(model, train_loader, val_loader)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank0]:     call._call_and_handle_interrupt(
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank0]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank0]:     self._run(model, ckpt_path=ckpt_path)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank0]:     results = self._run_stage()
+[rank0]:               ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+[rank0]:     self.fit_loop.run()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+[rank0]:     self.advance()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+[rank0]:     self.epoch_loop.run(self._data_fetcher)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 151, in run
+[rank0]:     self.on_advance_end(data_fetcher)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 370, in on_advance_end
+[rank0]:     self.val_loop.run()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+[rank0]:     return loop_run(self, *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 152, in run
+[rank0]:     return self.on_run_end()
+[rank0]:            ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 295, in on_run_end
+[rank0]:     self._on_evaluation_epoch_end()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 375, in _on_evaluation_epoch_end
+[rank0]:     call._call_lightning_module_hook(trainer, hook_name)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 176, in _call_lightning_module_hook
+[rank0]:     output = fn(*args, **kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 113, in on_validation_epoch_end
+[rank0]:     auc = self.val_auc.compute()
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/metric.py", line 699, in wrapped_func
+[rank0]:     value = _squeeze_if_scalar(compute(*args, **kwargs))
+[rank0]:                                ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/classification/auroc.py", line 125, in compute
+[rank0]:     return _binary_auroc_compute(state, self.thresholds, self.max_fpr)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/functional/classification/auroc.py", line 89, in _binary_auroc_compute
+[rank0]:     fpr, tpr, _ = _binary_roc_compute(state, thresholds, pos_label)
+[rank0]:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/functional/classification/roc.py", line 54, in _binary_roc_compute
+[rank0]:     fps, tps, thres = _binary_clf_curve(preds=state[0], target=state[1], pos_label=pos_label)
+[rank0]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/functional/classification/precision_recall_curve.py", line 60, in _binary_clf_curve
+[rank0]:     desc_score_indices = torch.argsort(preds, descending=True)
+[rank0]:                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 9.77 GiB. GPU 0 has a total capacity of 39.49 GiB of which 2.17 GiB is free. Including non-PyTorch memory, this process has 37.31 GiB memory in use. Of the allocated memory 24.94 GiB is allocated by PyTorch, and 10.85 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

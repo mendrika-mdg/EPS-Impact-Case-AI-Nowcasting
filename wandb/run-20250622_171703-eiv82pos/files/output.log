@@ -1,0 +1,148 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | token_proj  | Linear             | 36.1 K | train
+3 | decoder     | SimpleDecoder      | 689 K  | train
+4 | criterion   | BCEWithLogitsLoss  | 0      | train
+5 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+1.5 M     Trainable params
+0         Non-trainable params
+1.5 M     Total params
+6.079     Total estimated model params size (MB)
+73        Modules in train mode
+0         Modules in eval mode
+Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:00<00:00,  7.83it/s]
+/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: No positive samples in targets, true positive value should be meaningless. Returning zero tensor in true positive score
+  warnings.warn(*args, **kwargs)
+Traceback (most recent call last):
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 183, in <module>
+    main()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 179, in main
+    trainer.fit(model, train_loader, val_loader)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+    call._call_and_handle_interrupt(
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+    return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1054, in _run_stage
+    self._run_sanity_check()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1083, in _run_sanity_check
+    val_loop.run()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+    return loop_run(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 152, in run
+    return self.on_run_end()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 295, in on_run_end
+    self._on_evaluation_epoch_end()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 377, in _on_evaluation_epoch_end
+    trainer._logger_connector.on_epoch_end()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/logger_connector.py", line 196, in on_epoch_end
+    metrics = self.metrics
+              ^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/logger_connector.py", line 235, in metrics
+    return self.trainer._results.metrics(on_step)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 476, in metrics
+    value = self._get_cache(result_metric, on_step)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 440, in _get_cache
+    result_metric.compute()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 289, in wrapped_func
+    self._computed = compute(*args, **kwargs)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 249, in compute
+    value = self.meta.sync(self.value.clone())  # `clone` because `sync` is in-place
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/ddp.py", line 342, in reduce
+    return _sync_ddp_if_available(tensor, group, reduce_op=reduce_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/lightning_fabric/utilities/distributed.py", line 179, in _sync_ddp_if_available
+    return _sync_ddp(result, group=group, reduce_op=reduce_op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/lightning_fabric/utilities/distributed.py", line 229, in _sync_ddp
+    torch.distributed.all_reduce(result, op=op, group=group, async_op=False)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 2810, in all_reduce
+    work = group.allreduce([tensor], opts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: No backend type associated with device type cpu
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 183, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/model-pancast-training-optimised-one.py", line 179, in main
+[rank0]:     trainer.fit(model, train_loader, val_loader)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank0]:     call._call_and_handle_interrupt(
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank0]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank0]:     self._run(model, ckpt_path=ckpt_path)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank0]:     results = self._run_stage()
+[rank0]:               ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1054, in _run_stage
+[rank0]:     self._run_sanity_check()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1083, in _run_sanity_check
+[rank0]:     val_loop.run()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/utilities.py", line 179, in _decorator
+[rank0]:     return loop_run(self, *args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 152, in run
+[rank0]:     return self.on_run_end()
+[rank0]:            ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 295, in on_run_end
+[rank0]:     self._on_evaluation_epoch_end()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/evaluation_loop.py", line 377, in _on_evaluation_epoch_end
+[rank0]:     trainer._logger_connector.on_epoch_end()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/logger_connector.py", line 196, in on_epoch_end
+[rank0]:     metrics = self.metrics
+[rank0]:               ^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/logger_connector.py", line 235, in metrics
+[rank0]:     return self.trainer._results.metrics(on_step)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 476, in metrics
+[rank0]:     value = self._get_cache(result_metric, on_step)
+[rank0]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 440, in _get_cache
+[rank0]:     result_metric.compute()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 289, in wrapped_func
+[rank0]:     self._computed = compute(*args, **kwargs)
+[rank0]:                      ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/connectors/logger_connector/result.py", line 249, in compute
+[rank0]:     value = self.meta.sync(self.value.clone())  # `clone` because `sync` is in-place
+[rank0]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/ddp.py", line 342, in reduce
+[rank0]:     return _sync_ddp_if_available(tensor, group, reduce_op=reduce_op)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/lightning_fabric/utilities/distributed.py", line 179, in _sync_ddp_if_available
+[rank0]:     return _sync_ddp(result, group=group, reduce_op=reduce_op)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/lightning_fabric/utilities/distributed.py", line 229, in _sync_ddp
+[rank0]:     torch.distributed.all_reduce(result, op=op, group=group, async_op=False)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/c10d_logger.py", line 81, in wrapper
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py", line 2810, in all_reduce
+[rank0]:     work = group.allreduce([tensor], opts)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: RuntimeError: No backend type associated with device type cpu

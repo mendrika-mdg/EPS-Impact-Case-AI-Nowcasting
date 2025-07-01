@@ -1,0 +1,397 @@
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/4
+Initializing distributed: GLOBAL_RANK: 3, MEMBER: 4/4
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/4
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 4 processes
+----------------------------------------------------------------------------------------------------
+
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/4
+wandb: Currently logged in as: mgrakotomanga (mgrakotomanga-university-of-leeds) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.20.1
+wandb: Run data is saved locally in ./wandb/run-20250625_204104-ihrod15s
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run pancast-10km-self-bilinear
+wandb: ⭐️ View project at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast-t3
+wandb: 🚀 View run at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast-t3/runs/ihrod15s
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 3 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode 
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | set_pool    | AdaptiveAvgPool1d  | 0      | train
+3 | map_proj    | Linear             | 4.2 M  | train
+4 | decoder     | SimpleDecoder      | 5.3 M  | train
+5 | criterion   | SelfFSSLoss        | 0      | train
+6 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+10.3 M    Trainable params
+0         Non-trainable params
+10.3 M    Total params
+41.306    Total estimated model params size (MB)
+87        Modules in train mode
+0         Modules in eval mode
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 222, in <module>
+[rank2]:     main()
+[rank2]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 217, in main
+[rank2]:     trainer.fit(model, train_loader, val_loader)
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank2]:     call._call_and_handle_interrupt(
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank2]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank2]:     return function(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank2]:     self._run(model, ckpt_path=ckpt_path)
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank2]:     results = self._run_stage()
+[rank2]:               ^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+[rank2]:     self.fit_loop.run()
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+[rank2]:     self.advance()
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+[rank2]:     self.epoch_loop.run(self._data_fetcher)
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 150, in run
+[rank2]:     self.advance(data_fetcher)
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 282, in advance
+[rank2]:     batch, _, __ = next(data_fetcher)
+[rank2]:                    ^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 134, in __next__
+[rank2]:     batch = super().__next__()
+[rank2]:             ^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 61, in __next__
+[rank2]:     batch = next(self.iterator)
+[rank2]:             ^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 341, in __next__
+[rank2]:     out = next(self._iterator)
+[rank2]:           ^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 78, in __next__
+[rank2]:     out[i] = next(self.iterators[i])
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+[rank2]:     data = self._next_data()
+[rank2]:            ^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1515, in _next_data
+[rank2]:     return self._process_data(data, worker_id)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1550, in _process_data
+[rank2]:     data.reraise()
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/_utils.py", line 750, in reraise
+[rank2]:     raise exception
+[rank2]: RuntimeError: Caught RuntimeError in DataLoader worker process 0.
+[rank2]: Original Traceback (most recent call last):
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/worker.py", line 349, in _worker_loop
+[rank2]:     data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 33, in fetch
+[rank2]:     data.append(next(self.dataset_iter))
+[rank2]:                 ^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 84, in __iter__
+[rank2]:     shard = torch.load(path, map_location="cpu")
+[rank2]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/serialization.py", line 1486, in load
+[rank2]:     with _open_zipfile_reader(opened_file) as opened_zipfile:
+[rank2]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/serialization.py", line 771, in __init__
+[rank2]:     super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+[rank2]:                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: RuntimeError: PytorchStreamReader failed reading zip archive: failed finding central directory
+
+W0625 20:41:52.084000 84536 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 84543 closing signal SIGTERM
+W0625 20:41:52.089000 84536 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 84547 closing signal SIGTERM
+[rank: 1] Received SIGTERM: 15
+W0625 20:41:52.089000 84536 torch/distributed/elastic/multiprocessing/api.py:900] Sending process 84549 closing signal SIGTERM
+[rank: 0] Received SIGTERM: 15
+[rank: 3] Received SIGTERM: 15
+Traceback (most recent call last):
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 222, in <module>
+[rank3]:     main()
+[rank3]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 217, in main
+[rank3]:     trainer.fit(model, train_loader, val_loader)
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank3]:     call._call_and_handle_interrupt(
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank3]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank3]:     return function(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank3]:     self._run(model, ckpt_path=ckpt_path)
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank3]:     results = self._run_stage()
+[rank3]:               ^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+[rank3]:     self.fit_loop.run()
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+[rank3]:     self.advance()
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+[rank3]:     self.epoch_loop.run(self._data_fetcher)
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 150, in run
+[rank3]:     self.advance(data_fetcher)
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 282, in advance
+[rank3]:     batch, _, __ = next(data_fetcher)
+[rank3]:                    ^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 134, in __next__
+[rank3]:     batch = super().__next__()
+[rank3]:             ^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 61, in __next__
+[rank3]:     batch = next(self.iterator)
+[rank3]:             ^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 341, in __next__
+[rank3]:     out = next(self._iterator)
+[rank3]:           ^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 78, in __next__
+[rank3]:     out[i] = next(self.iterators[i])
+[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+[rank3]:     data = self._next_data()
+[rank3]:            ^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1491, in _next_data
+[rank3]:     idx, data = self._get_data()
+[rank3]:                 ^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1443, in _get_data
+[rank3]:     success, data = self._try_get_data()
+[rank3]:                     ^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1284, in _try_get_data
+[rank3]:     data = self._data_queue.get(timeout=timeout)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/miniconda3/lib/python3.12/queue.py", line 180, in get
+[rank3]:     self.not_empty.wait(remaining)
+[rank3]:   File "/home/users/mendrika/miniconda3/lib/python3.12/threading.py", line 359, in wait
+[rank3]:     gotit = waiter.acquire(True, timeout)
+[rank3]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+[rank3]:     _error_if_any_worker_fails()
+[rank3]: RuntimeError: DataLoader worker (pid 84764) is killed by signal: Terminated. 
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 222, in <module>
+    main()
+  File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 217, in main
+    trainer.fit(model, train_loader, val_loader)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+    call._call_and_handle_interrupt(
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+    return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+    results = self._run_stage()
+              ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+    self.fit_loop.run()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+    self.advance()
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+    self.epoch_loop.run(self._data_fetcher)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 150, in run
+    self.advance(data_fetcher)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 282, in advance
+    batch, _, __ = next(data_fetcher)
+                   ^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 134, in __next__
+    batch = super().__next__()
+            ^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 61, in __next__
+    batch = next(self.iterator)
+            ^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 341, in __next__
+    out = next(self._iterator)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 78, in __next__
+    out[i] = next(self.iterators[i])
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1491, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1443, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1284, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/miniconda3/lib/python3.12/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/home/users/mendrika/miniconda3/lib/python3.12/threading.py", line 359, in wait
+    gotit = waiter.acquire(True, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 84765) is killed by signal: Terminated. 
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 222, in <module>
+[rank1]:     main()
+[rank1]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 217, in main
+[rank1]:     trainer.fit(model, train_loader, val_loader)
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank1]:     call._call_and_handle_interrupt(
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank1]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank1]:     return function(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank1]:     self._run(model, ckpt_path=ckpt_path)
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank1]:     results = self._run_stage()
+[rank1]:               ^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+[rank1]:     self.fit_loop.run()
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+[rank1]:     self.advance()
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+[rank1]:     self.epoch_loop.run(self._data_fetcher)
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 150, in run
+[rank1]:     self.advance(data_fetcher)
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 282, in advance
+[rank1]:     batch, _, __ = next(data_fetcher)
+[rank1]:                    ^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 134, in __next__
+[rank1]:     batch = super().__next__()
+[rank1]:             ^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 61, in __next__
+[rank1]:     batch = next(self.iterator)
+[rank1]:             ^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 341, in __next__
+[rank1]:     out = next(self._iterator)
+[rank1]:           ^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 78, in __next__
+[rank1]:     out[i] = next(self.iterators[i])
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+[rank1]:     data = self._next_data()
+[rank1]:            ^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1491, in _next_data
+[rank1]:     idx, data = self._get_data()
+[rank1]:                 ^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1443, in _get_data
+[rank1]:     success, data = self._try_get_data()
+[rank1]:                     ^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1284, in _try_get_data
+[rank1]:     data = self._data_queue.get(timeout=timeout)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/miniconda3/lib/python3.12/queue.py", line 180, in get
+[rank1]:     self.not_empty.wait(remaining)
+[rank1]:   File "/home/users/mendrika/miniconda3/lib/python3.12/threading.py", line 359, in wait
+[rank1]:     gotit = waiter.acquire(True, timeout)
+[rank1]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 70, in handler
+[rank1]:     def handler(signum, frame):
+
+[rank1]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+[rank1]:     _error_if_any_worker_fails()
+[rank1]: RuntimeError: DataLoader worker (pid 84762) is killed by signal: Terminated. 
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 222, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py", line 217, in main
+[rank0]:     trainer.fit(model, train_loader, val_loader)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 561, in fit
+[rank0]:     call._call_and_handle_interrupt(
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/call.py", line 47, in _call_and_handle_interrupt
+[rank0]:     return trainer.strategy.launcher.launch(trainer_fn, *args, trainer=trainer, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/strategies/launchers/subprocess_script.py", line 105, in launch
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 599, in _fit_impl
+[rank0]:     self._run(model, ckpt_path=ckpt_path)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1012, in _run
+[rank0]:     results = self._run_stage()
+[rank0]:               ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/trainer/trainer.py", line 1056, in _run_stage
+[rank0]:     self.fit_loop.run()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 216, in run
+[rank0]:     self.advance()
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fit_loop.py", line 455, in advance
+[rank0]:     self.epoch_loop.run(self._data_fetcher)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 150, in run
+[rank0]:     self.advance(data_fetcher)
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/training_epoch_loop.py", line 282, in advance
+[rank0]:     batch, _, __ = next(data_fetcher)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 134, in __next__
+[rank0]:     batch = super().__next__()
+[rank0]:             ^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/loops/fetchers.py", line 61, in __next__
+[rank0]:     batch = next(self.iterator)
+[rank0]:             ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 341, in __next__
+[rank0]:     out = next(self._iterator)
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/pytorch_lightning/utilities/combined_loader.py", line 78, in __next__
+[rank0]:     out[i] = next(self.iterators[i])
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+[rank0]:     data = self._next_data()
+[rank0]:            ^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1491, in _next_data
+[rank0]:     idx, data = self._get_data()
+[rank0]:                 ^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1443, in _get_data
+[rank0]:     success, data = self._try_get_data()
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1284, in _try_get_data
+[rank0]:     data = self._data_queue.get(timeout=timeout)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/miniconda3/lib/python3.12/queue.py", line 180, in get
+[rank0]:     self.not_empty.wait(remaining)
+[rank0]:   File "/home/users/mendrika/miniconda3/lib/python3.12/threading.py", line 359, in wait
+[rank0]:     gotit = waiter.acquire(True, timeout)
+[rank0]:             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/utils/data/_utils/signal_handling.py", line 73, in handler
+[rank0]:     _error_if_any_worker_fails()
+[rank0]: RuntimeError: DataLoader worker (pid 84765) is killed by signal: Terminated. 
+E0625 20:42:20.141000 84536 torch/distributed/elastic/multiprocessing/api.py:874] failed (exitcode: 1) local_rank: 2 (pid: 84548) of binary: /home/users/mendrika/virtual-env/DeepLearning/bin/python
+Traceback (most recent call last):
+  File "/home/users/mendrika/virtual-env/DeepLearning/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/run.py", line 892, in main
+    run(args)
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/run.py", line 883, in run
+    elastic_launch(
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 139, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 270, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/users/mendrika/EPS-Impact-Case-AI-Nowcasting/model/africa/pancast/training/t3/iter-shard-10/t3-iter-shard-full-ds-self.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-06-25_20:41:52
+  host      : gpuhost009.jc.rl.ac.uk
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 84548)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

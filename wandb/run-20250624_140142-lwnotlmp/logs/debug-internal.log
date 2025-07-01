@@ -1,0 +1,15 @@
+{"time":"2025-06-24T14:01:42.694474029+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250624_140142-lwnotlmp/logs/debug-core.log"}
+{"time":"2025-06-24T14:01:42.958742962+01:00","level":"INFO","msg":"stream: created new stream","id":"lwnotlmp"}
+{"time":"2025-06-24T14:01:42.958772751+01:00","level":"INFO","msg":"stream: started","id":"lwnotlmp"}
+{"time":"2025-06-24T14:01:42.95881566+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"lwnotlmp"}
+{"time":"2025-06-24T14:01:42.95884962+01:00","level":"INFO","msg":"handler: started","stream_id":"lwnotlmp"}
+{"time":"2025-06-24T14:01:42.95882089+01:00","level":"INFO","msg":"sender: started","stream_id":"lwnotlmp"}
+{"time":"2025-06-24T14:01:43.418549578+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-24T14:14:16.928297219+01:00","level":"INFO","msg":"stream: closing","id":"lwnotlmp"}
+{"time":"2025-06-24T14:14:16.928355468+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-24T14:14:16.928699532+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-24T14:14:20.002758523+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-24T14:14:20.322962928+01:00","level":"INFO","msg":"handler: closed","stream_id":"lwnotlmp"}
+{"time":"2025-06-24T14:14:20.322999237+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"lwnotlmp"}
+{"time":"2025-06-24T14:14:20.323143635+01:00","level":"INFO","msg":"sender: closed","stream_id":"lwnotlmp"}
+{"time":"2025-06-24T14:14:20.324883925+01:00","level":"INFO","msg":"stream: closed","id":"lwnotlmp"}

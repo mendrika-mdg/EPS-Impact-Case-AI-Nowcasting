@@ -1,0 +1,7 @@
+{"time":"2025-06-22T18:07:40.269965331+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250622_180740-nu4fmlxr/logs/debug-core.log"}
+{"time":"2025-06-22T18:07:40.515530966+01:00","level":"INFO","msg":"stream: created new stream","id":"nu4fmlxr"}
+{"time":"2025-06-22T18:07:40.515574145+01:00","level":"INFO","msg":"stream: started","id":"nu4fmlxr"}
+{"time":"2025-06-22T18:07:40.515609144+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"nu4fmlxr"}
+{"time":"2025-06-22T18:07:40.515596155+01:00","level":"INFO","msg":"handler: started","stream_id":"nu4fmlxr"}
+{"time":"2025-06-22T18:07:40.515602814+01:00","level":"INFO","msg":"sender: started","stream_id":"nu4fmlxr"}
+{"time":"2025-06-22T18:07:40.937890314+01:00","level":"INFO","msg":"Starting system monitor"}

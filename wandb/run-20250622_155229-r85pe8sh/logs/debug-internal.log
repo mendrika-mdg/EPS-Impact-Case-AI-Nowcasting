@@ -1,0 +1,7 @@
+{"time":"2025-06-22T15:52:29.939832116+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250622_155229-r85pe8sh/logs/debug-core.log"}
+{"time":"2025-06-22T15:52:30.30705815+01:00","level":"INFO","msg":"stream: created new stream","id":"r85pe8sh"}
+{"time":"2025-06-22T15:52:30.307115109+01:00","level":"INFO","msg":"stream: started","id":"r85pe8sh"}
+{"time":"2025-06-22T15:52:30.307130628+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"r85pe8sh"}
+{"time":"2025-06-22T15:52:30.307161578+01:00","level":"INFO","msg":"handler: started","stream_id":"r85pe8sh"}
+{"time":"2025-06-22T15:52:30.307137308+01:00","level":"INFO","msg":"sender: started","stream_id":"r85pe8sh"}
+{"time":"2025-06-22T15:52:30.712877897+01:00","level":"INFO","msg":"Starting system monitor"}

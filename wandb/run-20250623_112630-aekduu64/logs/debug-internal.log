@@ -1,0 +1,7 @@
+{"time":"2025-06-23T11:26:30.965940614+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250623_112630-aekduu64/logs/debug-core.log"}
+{"time":"2025-06-23T11:26:32.122962644+01:00","level":"INFO","msg":"stream: created new stream","id":"aekduu64"}
+{"time":"2025-06-23T11:26:32.123000253+01:00","level":"INFO","msg":"stream: started","id":"aekduu64"}
+{"time":"2025-06-23T11:26:32.123027733+01:00","level":"INFO","msg":"sender: started","stream_id":"aekduu64"}
+{"time":"2025-06-23T11:26:32.123048653+01:00","level":"INFO","msg":"handler: started","stream_id":"aekduu64"}
+{"time":"2025-06-23T11:26:32.123024993+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"aekduu64"}
+{"time":"2025-06-23T11:26:32.544408544+01:00","level":"INFO","msg":"Starting system monitor"}

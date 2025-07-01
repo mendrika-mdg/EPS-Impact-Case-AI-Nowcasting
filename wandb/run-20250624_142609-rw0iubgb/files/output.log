@@ -1,0 +1,25 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | set_pool    | AdaptiveAvgPool1d  | 0      | train
+3 | map_proj    | Linear             | 1.1 M  | train
+4 | decoder     | SimpleDecoder      | 5.3 M  | train
+5 | criterion   | BCEWithLogitsLoss  | 0      | train
+6 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+7.2 M     Trainable params
+0         Non-trainable params
+7.2 M     Total params
+28.653    Total estimated model params size (MB)
+92        Modules in train mode
+0         Modules in eval mode
+Epoch 1: 100%|██████████| 1210/1210 [10:12<00:00,  1.98it/s, v_num=ubgb, val_auc=0.850]
+Done!                                                                     
+[rank: 0] Metric val_auc improved. New best score: 0.680
+Epoch 0, global step 1210: 'val_auc' reached 0.68046 (best 0.68046), saving model to './pancast/rw0iubgb/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.170 >= min_delta = 0.001. New best score: 0.850
+Epoch 1, global step 2420: 'val_auc' reached 0.85014 (best 0.85014), saving model to './pancast/rw0iubgb/checkpoints/best-core2map.ckpt' as top 1
+`Trainer.fit` stopped: `max_epochs=2` reached.

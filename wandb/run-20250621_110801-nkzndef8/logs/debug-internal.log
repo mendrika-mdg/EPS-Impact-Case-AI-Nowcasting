@@ -1,0 +1,7 @@
+{"time":"2025-06-21T11:08:02.978377126+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250621_110801-nkzndef8/logs/debug-core.log"}
+{"time":"2025-06-21T11:08:03.474090364+01:00","level":"INFO","msg":"stream: created new stream","id":"nkzndef8"}
+{"time":"2025-06-21T11:08:03.474132663+01:00","level":"INFO","msg":"stream: started","id":"nkzndef8"}
+{"time":"2025-06-21T11:08:03.47429256+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"nkzndef8"}
+{"time":"2025-06-21T11:08:03.474360809+01:00","level":"INFO","msg":"sender: started","stream_id":"nkzndef8"}
+{"time":"2025-06-21T11:08:03.474390798+01:00","level":"INFO","msg":"handler: started","stream_id":"nkzndef8"}
+{"time":"2025-06-21T11:08:03.916943174+01:00","level":"INFO","msg":"Starting system monitor"}

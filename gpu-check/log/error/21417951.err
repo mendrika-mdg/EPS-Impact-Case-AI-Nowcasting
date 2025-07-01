@@ -1,0 +1,51 @@
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/4
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 4 processes
+----------------------------------------------------------------------------------------------------
+
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/4
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/4
+Initializing distributed: GLOBAL_RANK: 3, MEMBER: 4/4
+wandb: Currently logged in as: mgrakotomanga (mgrakotomanga-university-of-leeds) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: creating run
+wandb: Tracking run with wandb version 0.20.1
+wandb: Run data is saved locally in ./wandb/run-20250623_120929-nz3odfyp
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run iter-full-32
+wandb: ⭐️ View project at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast
+wandb: 🚀 View run at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast/runs/nz3odfyp
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 3 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode 
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | token_proj  | Linear             | 36.1 K | train
+3 | decoder     | SimpleDecoder      | 689 K  | train
+4 | criterion   | BCEWithLogitsLoss  | 0      | train
+5 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+1.5 M     Trainable params
+0         Non-trainable params
+1.5 M     Total params
+6.079     Total estimated model params size (MB)
+73        Modules in train mode
+0         Modules in eval mode
+[rank: 0] Metric val_auc improved. New best score: 0.738
+[rank: 1] Metric val_auc improved. New best score: 0.738
+[rank: 3] Metric val_auc improved. New best score: 0.738
+[rank: 2] Metric val_auc improved. New best score: 0.738
+Epoch 0, global step 1000: 'val_auc' reached 0.73812 (best 0.73812), saving model to './pancast/nz3odfyp/checkpoints/best-core2map.ckpt' as top 1
+[rank: 0] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.787
+[rank: 2] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.787
+[rank: 1] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.787
+[rank: 3] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.787
+Epoch 1, global step 2000: 'val_auc' reached 0.78650 (best 0.78650), saving model to './pancast/nz3odfyp/checkpoints/best-core2map.ckpt' as top 1

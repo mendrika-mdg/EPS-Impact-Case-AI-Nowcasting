@@ -1,0 +1,15 @@
+{"time":"2025-06-24T13:57:25.651883403+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250624_135725-hbrpjfi7/logs/debug-core.log"}
+{"time":"2025-06-24T13:57:26.307142135+01:00","level":"INFO","msg":"stream: created new stream","id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:26.307194284+01:00","level":"INFO","msg":"stream: started","id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:26.307208364+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:26.307239394+01:00","level":"INFO","msg":"handler: started","stream_id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:26.307218894+01:00","level":"INFO","msg":"sender: started","stream_id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:26.728671221+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-24T13:57:35.369189156+01:00","level":"INFO","msg":"stream: closing","id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:35.369244625+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-24T13:57:35.369273814+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-24T13:57:35.870289695+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-24T13:57:36.050014288+01:00","level":"INFO","msg":"handler: closed","stream_id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:36.050085017+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:36.050334302+01:00","level":"INFO","msg":"sender: closed","stream_id":"hbrpjfi7"}
+{"time":"2025-06-24T13:57:36.055102191+01:00","level":"INFO","msg":"stream: closed","id":"hbrpjfi7"}

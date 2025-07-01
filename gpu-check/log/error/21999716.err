@@ -1,0 +1,106 @@
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 3, MEMBER: 4/4
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/4
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/4
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 4 processes
+----------------------------------------------------------------------------------------------------
+
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/4
+wandb: Currently logged in as: mgrakotomanga (mgrakotomanga-university-of-leeds) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.20.1
+wandb: Run data is saved locally in ./wandb/run-20250625_154002-9bmd4qbe
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run pancast-10km-self-bilinear
+wandb: ⭐️ View project at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast-self
+wandb: 🚀 View run at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast-self/runs/9bmd4qbe
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 3 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode 
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | set_pool    | AdaptiveAvgPool1d  | 0      | train
+3 | map_proj    | Linear             | 4.2 M  | train
+4 | decoder     | SimpleDecoder      | 5.3 M  | train
+5 | criterion   | SelfFSSLoss        | 0      | train
+6 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+10.3 M    Trainable params
+0         Non-trainable params
+10.3 M    Total params
+41.306    Total estimated model params size (MB)
+87        Modules in train mode
+0         Modules in eval mode
+[rank: 3] Metric val_auc improved. New best score: 0.664
+[rank: 0] Metric val_auc improved. New best score: 0.664
+[rank: 1] Metric val_auc improved. New best score: 0.664
+[rank: 2] Metric val_auc improved. New best score: 0.664
+Epoch 0, global step 1210: 'val_auc' reached 0.66418 (best 0.66418), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 2] Metric val_auc improved by 0.191 >= min_delta = 0.001. New best score: 0.855
+[rank: 0] Metric val_auc improved by 0.191 >= min_delta = 0.001. New best score: 0.855
+[rank: 1] Metric val_auc improved by 0.191 >= min_delta = 0.001. New best score: 0.855
+[rank: 3] Metric val_auc improved by 0.191 >= min_delta = 0.001. New best score: 0.855
+Epoch 1, global step 2420: 'val_auc' reached 0.85531 (best 0.85531), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 3] Metric val_auc improved by 0.042 >= min_delta = 0.001. New best score: 0.897
+[rank: 2] Metric val_auc improved by 0.042 >= min_delta = 0.001. New best score: 0.897
+[rank: 1] Metric val_auc improved by 0.042 >= min_delta = 0.001. New best score: 0.897
+[rank: 0] Metric val_auc improved by 0.042 >= min_delta = 0.001. New best score: 0.897
+Epoch 2, global step 3630: 'val_auc' reached 0.89682 (best 0.89682), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 2] Metric val_auc improved by 0.013 >= min_delta = 0.001. New best score: 0.910
+[rank: 3] Metric val_auc improved by 0.013 >= min_delta = 0.001. New best score: 0.910
+[rank: 0] Metric val_auc improved by 0.013 >= min_delta = 0.001. New best score: 0.910
+[rank: 1] Metric val_auc improved by 0.013 >= min_delta = 0.001. New best score: 0.910
+Epoch 3, global step 4840: 'val_auc' reached 0.90976 (best 0.90976), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 2] Metric val_auc improved by 0.020 >= min_delta = 0.001. New best score: 0.930
+[rank: 0] Metric val_auc improved by 0.020 >= min_delta = 0.001. New best score: 0.930
+[rank: 1] Metric val_auc improved by 0.020 >= min_delta = 0.001. New best score: 0.930
+[rank: 3] Metric val_auc improved by 0.020 >= min_delta = 0.001. New best score: 0.930
+Epoch 4, global step 6050: 'val_auc' reached 0.92966 (best 0.92966), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 2] Metric val_auc improved by 0.012 >= min_delta = 0.001. New best score: 0.942
+[rank: 0] Metric val_auc improved by 0.012 >= min_delta = 0.001. New best score: 0.942
+[rank: 3] Metric val_auc improved by 0.012 >= min_delta = 0.001. New best score: 0.942
+[rank: 1] Metric val_auc improved by 0.012 >= min_delta = 0.001. New best score: 0.942
+Epoch 5, global step 7260: 'val_auc' reached 0.94166 (best 0.94166), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 2] Metric val_auc improved by 0.007 >= min_delta = 0.001. New best score: 0.948
+[rank: 3] Metric val_auc improved by 0.007 >= min_delta = 0.001. New best score: 0.948
+[rank: 0] Metric val_auc improved by 0.007 >= min_delta = 0.001. New best score: 0.948
+[rank: 1] Metric val_auc improved by 0.007 >= min_delta = 0.001. New best score: 0.948
+Epoch 6, global step 8470: 'val_auc' reached 0.94846 (best 0.94846), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 1] Metric val_auc improved by 0.005 >= min_delta = 0.001. New best score: 0.954
+[rank: 3] Metric val_auc improved by 0.005 >= min_delta = 0.001. New best score: 0.954
+[rank: 2] Metric val_auc improved by 0.005 >= min_delta = 0.001. New best score: 0.954
+[rank: 0] Metric val_auc improved by 0.005 >= min_delta = 0.001. New best score: 0.954
+Epoch 7, global step 9680: 'val_auc' reached 0.95363 (best 0.95363), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 1] Metric val_auc improved by 0.003 >= min_delta = 0.001. New best score: 0.957
+[rank: 2] Metric val_auc improved by 0.003 >= min_delta = 0.001. New best score: 0.957
+[rank: 0] Metric val_auc improved by 0.003 >= min_delta = 0.001. New best score: 0.957
+[rank: 3] Metric val_auc improved by 0.003 >= min_delta = 0.001. New best score: 0.957
+Epoch 8, global step 10890: 'val_auc' reached 0.95691 (best 0.95691), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+[rank: 3] Metric val_auc improved by 0.001 >= min_delta = 0.001. New best score: 0.958
+[rank: 1] Metric val_auc improved by 0.001 >= min_delta = 0.001. New best score: 0.958
+[rank: 2] Metric val_auc improved by 0.001 >= min_delta = 0.001. New best score: 0.958
+[rank: 0] Metric val_auc improved by 0.001 >= min_delta = 0.001. New best score: 0.958
+Epoch 9, global step 12100: 'val_auc' reached 0.95819 (best 0.95819), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+Epoch 10, global step 13310: 'val_auc' reached 0.95871 (best 0.95871), saving model to './pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt' as top 1
+Epoch 11, global step 14520: 'val_auc' was not in top 1
+Epoch 12, global step 15730: 'val_auc' was not in top 1
+Epoch 13, global step 16940: 'val_auc' was not in top 1
+Epoch 14, global step 18150: 'val_auc' was not in top 1
+Epoch 15, global step 19360: 'val_auc' was not in top 1
+Epoch 16, global step 20570: 'val_auc' was not in top 1
+Epoch 17, global step 21780: 'val_auc' was not in top 1
+Epoch 18, global step 22990: 'val_auc' was not in top 1
+[rank: 1] Monitored metric val_auc did not improve in the last 10 records. Best score: 0.958. Signaling Trainer to stop.
+[rank: 3] Monitored metric val_auc did not improve in the last 10 records. Best score: 0.958. Signaling Trainer to stop.
+[rank: 0] Monitored metric val_auc did not improve in the last 10 records. Best score: 0.958. Signaling Trainer to stop.
+[rank: 2] Monitored metric val_auc did not improve in the last 10 records. Best score: 0.958. Signaling Trainer to stop.
+Epoch 19, global step 24200: 'val_auc' was not in top 1
+`Trainer.fit` stopped: `max_epochs=20` reached.

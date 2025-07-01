@@ -1,0 +1,52 @@
+Using bfloat16 Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/4
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 4 processes
+----------------------------------------------------------------------------------------------------
+
+Initializing distributed: GLOBAL_RANK: 3, MEMBER: 4/4
+Initializing distributed: GLOBAL_RANK: 1, MEMBER: 2/4
+Initializing distributed: GLOBAL_RANK: 2, MEMBER: 3/4
+wandb: Currently logged in as: mgrakotomanga (mgrakotomanga-university-of-leeds) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.20.1
+wandb: Run data is saved locally in ./wandb/run-20250625_040538-91sbu69q
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run pancast-10km-self
+wandb: ⭐️ View project at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast-self
+wandb: 🚀 View run at https://wandb.ai/mgrakotomanga-university-of-leeds/pancast-self/runs/91sbu69q
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 2 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 3 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+LOCAL_RANK: 1 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode 
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | set_pool    | AdaptiveAvgPool1d  | 0      | train
+3 | map_proj    | Linear             | 1.1 M  | train
+4 | decoder     | SimpleDecoder      | 5.3 M  | train
+5 | criterion   | SelfFSSLoss        | 0      | train
+6 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+7.2 M     Trainable params
+0         Non-trainable params
+7.2 M     Total params
+28.653    Total estimated model params size (MB)
+94        Modules in train mode
+0         Modules in eval mode
+[rank: 3] Metric val_auc improved. New best score: 0.621
+[rank: 2] Metric val_auc improved. New best score: 0.621
+[rank: 0] Metric val_auc improved. New best score: 0.621
+[rank: 1] Metric val_auc improved. New best score: 0.621
+Epoch 0, global step 1210: 'val_auc' reached 0.62133 (best 0.62133), saving model to './pancast-self/91sbu69q/checkpoints/best-core2map.ckpt' as top 1
+[rank: 1] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.669
+[rank: 0] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.669
+[rank: 2] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.669
+[rank: 3] Metric val_auc improved by 0.048 >= min_delta = 0.001. New best score: 0.669
+Epoch 1, global step 2420: 'val_auc' reached 0.66927 (best 0.66927), saving model to './pancast-self/91sbu69q/checkpoints/best-core2map.ckpt' as top 1
+slurmstepd: error: *** JOB 21881084 ON gpuhost011 CANCELLED AT 2025-06-25T04:31:15 ***

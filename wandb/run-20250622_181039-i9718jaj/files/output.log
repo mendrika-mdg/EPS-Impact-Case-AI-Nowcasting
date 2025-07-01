@@ -1,0 +1,35 @@
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0,1,2,3]
+
+  | Name        | Type               | Params | Mode
+-----------------------------------------------------------
+0 | in_proj     | Linear             | 1.3 K  | train
+1 | transformer | TransformerEncoder | 793 K  | train
+2 | token_proj  | Linear             | 36.1 K | train
+3 | decoder     | SimpleDecoder      | 689 K  | train
+4 | criterion   | BCEWithLogitsLoss  | 0      | train
+5 | val_auc     | BinaryAUROC        | 0      | train
+-----------------------------------------------------------
+1.5 M     Trainable params
+0         Non-trainable params
+1.5 M     Total params
+6.079     Total estimated model params size (MB)
+73        Modules in train mode
+0         Modules in eval mode
+Epoch 9: 100%|██████████| 100/100 [00:06<00:00, 15.02it/s, v_num=8jaj, val_auc=0.903]
+/home/users/mendrika/virtual-env/DeepLearning/lib/python3.12/site-packages/torchmetrics/utilities/prints.py:43: UserWarning: No positive samples in targets, true positive value should be meaningless. Returning zero tensor in true positive score
+  warnings.warn(*args, **kwargs)
+Done!                                                                      
+[rank: 0] Metric val_auc improved. New best score: 0.905
+Epoch 0, global step 100: 'val_auc' reached 0.90504 (best 0.90504), saving model to './core2map/i9718jaj/checkpoints/best-core2map.ckpt' as top 1
+Epoch 1, global step 200: 'val_auc' was not in top 1
+Epoch 2, global step 300: 'val_auc' was not in top 1
+Epoch 3, global step 400: 'val_auc' was not in top 1
+[rank: 0] Metric val_auc improved by 0.018 >= min_delta = 0.001. New best score: 0.923
+Epoch 4, global step 500: 'val_auc' reached 0.92322 (best 0.92322), saving model to './core2map/i9718jaj/checkpoints/best-core2map.ckpt' as top 1
+Epoch 5, global step 600: 'val_auc' was not in top 1
+[rank: 0] Metric val_auc improved by 0.020 >= min_delta = 0.001. New best score: 0.943
+Epoch 6, global step 700: 'val_auc' reached 0.94295 (best 0.94295), saving model to './core2map/i9718jaj/checkpoints/best-core2map.ckpt' as top 1
+Epoch 7, global step 800: 'val_auc' was not in top 1
+Epoch 8, global step 900: 'val_auc' was not in top 1
+Epoch 9, global step 1000: 'val_auc' was not in top 1
+`Trainer.fit` stopped: `max_epochs=10` reached.

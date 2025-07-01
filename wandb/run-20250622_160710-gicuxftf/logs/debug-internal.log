@@ -1,0 +1,15 @@
+{"time":"2025-06-22T16:07:10.953638387+01:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"wandb/run-20250622_160710-gicuxftf/logs/debug-core.log"}
+{"time":"2025-06-22T16:07:11.210222361+01:00","level":"INFO","msg":"stream: created new stream","id":"gicuxftf"}
+{"time":"2025-06-22T16:07:11.21026851+01:00","level":"INFO","msg":"stream: started","id":"gicuxftf"}
+{"time":"2025-06-22T16:07:11.21028952+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"gicuxftf"}
+{"time":"2025-06-22T16:07:11.21030206+01:00","level":"INFO","msg":"sender: started","stream_id":"gicuxftf"}
+{"time":"2025-06-22T16:07:11.210328359+01:00","level":"INFO","msg":"handler: started","stream_id":"gicuxftf"}
+{"time":"2025-06-22T16:07:11.553293235+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-22T16:08:31.410941963+01:00","level":"INFO","msg":"stream: closing","id":"gicuxftf"}
+{"time":"2025-06-22T16:08:31.412631709+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-22T16:08:31.412713587+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-22T16:08:31.896799268+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-22T16:08:32.067895434+01:00","level":"INFO","msg":"handler: closed","stream_id":"gicuxftf"}
+{"time":"2025-06-22T16:08:32.067920553+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gicuxftf"}
+{"time":"2025-06-22T16:08:32.067932233+01:00","level":"INFO","msg":"sender: closed","stream_id":"gicuxftf"}
+{"time":"2025-06-22T16:08:32.069954122+01:00","level":"INFO","msg":"stream: closed","id":"gicuxftf"}
