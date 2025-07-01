@@ -1,0 +1,6 @@
+pancast-self/91sbu69q/checkpoints/best-core2map.ckpt
+pancast/qww4p23z/checkpoints/best-core2map.ckpt
+pancast/rw0iubgb/checkpoints/best-core2map.ckpt
+pancast/b7pbzfij/checkpoints/best-core2map.ckpt
+pancast-self/8g02i279/checkpoints/best-core2map.ckpt
+log/submission-history/nb-x0/output/16923840.out
