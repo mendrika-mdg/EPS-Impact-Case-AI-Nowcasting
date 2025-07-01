@@ -1,0 +1,6 @@
+pancast-self/9bmd4qbe/checkpoints/best-core2map.ckpt
+pancast-self/kutwqzim/checkpoints/best-core2map.ckpt
+pancast-t1/k5u2r1s3/checkpoints/best-core2map.ckpt
+pancast-t3/zwluy290/checkpoints/best-core2map.ckpt
+pancast-t3/689aro2o/checkpoints/best-core2map.ckpt
+model/africa/pancast/wandb/run-20250622_144651-9gizagdp/run-9gizagdp.wandb
